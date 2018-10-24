@@ -1,0 +1,26 @@
+{
+  "name": "react-audio-illustrator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gejsi/react-audio-illustrator.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gejsi/react-audio-illustrator/issues"
+  },
+  "homepage": "https://github.com/Gejsi/react-audio-illustrator#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.10.3"
+  },
+  "dependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  }
+}
