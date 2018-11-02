@@ -1,16 +1,55 @@
-import styled from 'styled-components'
+import { Component } from 'react'
 
-export const Illustrator = styled.div`
-  height: 200px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  transform: rotateX(180deg);
-`
+interface IProps {
+  audioRef: HTMLMediaElement
+  children: any
+}
 
-export const Bar = styled.div`
-  width: ${props => `calc(100% / ${props.length})`};
-  background: pink;
-  height: 0;
-`
+export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
+  private audioSrc: MediaElementAudioSourceNode
+  private analyser: AnalyserNode
+  private id: number
+
+  state = { audioData: new Uint8Array(0) }
+
+  componentWillUnmount() {
+    this.stopLoop()
+    if (this.audioSrc) this.audioSrc.disconnect()
+    
+    if (this.analyser) this.analyser.disconnect()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.audioRef !== prevProps.audioRef) {
+      const ctx = new (AudioContext || webkitAudioContext)()
+      this.audioSrc = ctx.createMediaElementSource(this.props.audioRef)
+      this.analyser = ctx.createAnalyser()
+
+      this.audioSrc.connect(this.analyser)
+      this.analyser.connect(ctx.destination)
+      this.analyser.fftSize = 256
+    }
+  }
+
+  startLoop = () => {
+    this.id = requestAnimationFrame(this.startLoop)
+
+    const bufferLength = this.analyser.frequencyBinCount
+    const dataArray = new Uint8Array(bufferLength)
+    this.analyser.getByteFrequencyData(dataArray)
+
+    this.setState({ audioData: dataArray })
+  }
+
+  stopLoop = () => {
+    cancelAnimationFrame(this.id)
+  }
+
+  render() {
+    return this.props.children({
+      audioData: this.state.audioData,
+      startLoop: this.startLoop,
+      stopLoop: this.stopLoop
+    })
+  }
+}

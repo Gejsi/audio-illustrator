@@ -15,6 +15,7 @@
   },
   "types": [
     "react",
-    "react-dom"
+    "react-dom",
+    "webaudioapi"
   ]
 }
