@@ -5,7 +5,10 @@ interface IProps {
   children: any
 }
 
-export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
+export class Illustrator extends Component<
+  IProps,
+  { audioData: Uint8Array }
+> {
   private audioSrc: MediaElementAudioSourceNode
   private analyser: AnalyserNode
   private id: number
@@ -14,14 +17,15 @@ export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
 
   componentWillUnmount() {
     this.stopLoop()
+
     if (this.audioSrc) this.audioSrc.disconnect()
-    
+
     if (this.analyser) this.analyser.disconnect()
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.audioRef !== prevProps.audioRef) {
-      const ctx = new (AudioContext || webkitAudioContext)()
+      const ctx: AudioContext = new (AudioContext || webkitAudioContext)()
       this.audioSrc = ctx.createMediaElementSource(this.props.audioRef)
       this.analyser = ctx.createAnalyser()
 
@@ -34,8 +38,8 @@ export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
   startLoop = () => {
     this.id = requestAnimationFrame(this.startLoop)
 
-    const bufferLength = this.analyser.frequencyBinCount
-    const dataArray = new Uint8Array(bufferLength)
+    const bufferLength: number = this.analyser.frequencyBinCount
+    const dataArray: Uint8Array = new Uint8Array(bufferLength)
     this.analyser.getByteFrequencyData(dataArray)
 
     this.setState({ audioData: dataArray })
@@ -48,8 +52,8 @@ export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
   render() {
     return this.props.children({
       audioData: this.state.audioData,
-      startLoop: this.startLoop,
-      stopLoop: this.stopLoop
+      startAnimation: this.startLoop,
+      stopAnimation: this.stopLoop
     })
   }
 }

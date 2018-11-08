@@ -4,18 +4,14 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "jsx": "react",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
     "strictNullChecks": true,
-    "preserveConstEnums": true,
+    "preserveConstEnums": true
   },
-  "types": [
-    "react",
-    "react-dom",
-    "webaudioapi"
-  ]
+  "types": ["react", "react-dom", "webaudioapi"]
 }
