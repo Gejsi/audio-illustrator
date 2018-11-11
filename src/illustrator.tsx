@@ -1,9 +1,13 @@
-import { Component } from 'react'
+import { Component, ReactNode } from 'react'
+import { hasRender, hasChildren } from './types'
 
-interface IProps {
-  audioRef: HTMLMediaElement
-  children: any
-}
+type IProps = { audioRef: HTMLAudioElement } & RenderProps
+
+type RenderProps =
+  | { children: (props: Data) => ReactNode }
+  | { render: (props: Data) => ReactNode }
+
+type Data = ReturnType<Illustrator['renderData']>
 
 export class Illustrator extends Component<
   IProps,
@@ -35,7 +39,7 @@ export class Illustrator extends Component<
     }
   }
 
-  startLoop = () => {
+  private startLoop = () => {
     this.id = requestAnimationFrame(this.startLoop)
 
     const bufferLength: number = this.analyser.frequencyBinCount
@@ -45,15 +49,29 @@ export class Illustrator extends Component<
     this.setState({ audioData: dataArray })
   }
 
-  stopLoop = () => {
+  private stopLoop = () => {
     cancelAnimationFrame(this.id)
   }
 
-  render() {
-    return this.props.children({
+  private renderData = () => {
+    return {
       audioData: this.state.audioData,
       startAnimation: this.startLoop,
       stopAnimation: this.stopLoop
-    })
+    }
+  }
+
+  render() {
+    if (hasRender(this.props)) {
+      return this.props.render(this.renderData())
+    }
+
+    if (hasChildren(this.props)) {
+      return this.props.children(this.renderData())
+    }
+
+    throw new Error(
+      'Render prop or children are mandatory and they must be a function.'
+    )
   }
 }

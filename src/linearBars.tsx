@@ -3,7 +3,7 @@ import * as React from 'react'
 interface IProps {
   bars: number
   audioData: Uint8Array
-  barsStyles: object
+  barsStyles?: object
 }
 
 export const LinearBars = ({
