@@ -1,7 +1,7 @@
 import { Component, ReactNode } from 'react'
 import { hasRender, hasChildren } from './types'
 
-type IProps = { audioRef: HTMLAudioElement } & RenderProps
+type IProps = { audioRef: HTMLAudioElement | null } & RenderProps
 
 type RenderProps =
   | { children: (props: Data) => ReactNode }
@@ -30,7 +30,7 @@ export class Illustrator extends Component<
   componentDidUpdate(prevProps) {
     if (this.props.audioRef !== prevProps.audioRef) {
       const ctx: AudioContext = new (AudioContext || webkitAudioContext)()
-      this.audioSrc = ctx.createMediaElementSource(this.props.audioRef)
+      this.audioSrc = ctx.createMediaElementSource(this.props.audioRef!)
       this.analyser = ctx.createAnalyser()
 
       this.audioSrc.connect(this.analyser)

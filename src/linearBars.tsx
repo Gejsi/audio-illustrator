@@ -4,6 +4,7 @@ interface IProps {
   bars: number
   audioData: Uint8Array
   barsStyles?: object
+  [rest: string]: any
 }
 
 export const LinearBars = ({
@@ -12,7 +13,7 @@ export const LinearBars = ({
   barsStyles,
   ...rest
 }: IProps) => {
-  const barsArray = Array.from({ length: bars }, (v, k) => k)
+  const barsArray: number[] = Array.from({ length: bars }, (v, k) => k)
 
   return (
     <svg width='100%' {...rest}>
