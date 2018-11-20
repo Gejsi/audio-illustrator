@@ -26,7 +26,7 @@ export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
 
   componentDidUpdate(prevProps) {
     if (this.props.audioRef !== prevProps.audioRef) {
-      const ctx: AudioContext = new (AudioContext || webkitAudioContext)()
+      const ctx: AudioContext = new AudioContext()
       this.audioSrc = ctx.createMediaElementSource(this.props.audioRef!)
       this.analyser = ctx.createAnalyser()
 
