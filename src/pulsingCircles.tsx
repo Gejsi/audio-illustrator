@@ -13,10 +13,7 @@ export const PulsingCircles = ({
   circlesStyles,
   ...rest
 }: IProps) => {
-  const circlesArray: number[] = Array.from(
-    { length: circles },
-    (v, k) => k
-  )
+  const circlesArray: number[] = Array.from({ length: circles }, (v, k) => k)
 
   return (
     <svg width='100%' height='100%' {...rest}>

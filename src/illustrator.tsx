@@ -9,10 +9,7 @@ type RenderProps =
 
 type Data = ReturnType<Illustrator['renderData']>
 
-export class Illustrator extends Component<
-  IProps,
-  { audioData: Uint8Array }
-> {
+export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
   private audioSrc: MediaElementAudioSourceNode
   private analyser: AnalyserNode
   private id: number

@@ -1,18 +1,12 @@
 import * as React from 'react'
-
-interface IProps {
-  bars: number
-  audioData: Uint8Array
-  barsStyles?: object
-  [rest: string]: any
-}
+import { IBarsProps } from './types'
 
 export const LinearBars = ({
   bars,
   audioData,
   barsStyles,
   ...rest
-}: IProps) => {
+}: IBarsProps) => {
   const barsArray: number[] = Array.from({ length: bars }, (v, k) => k)
 
   return (
@@ -21,14 +15,10 @@ export const LinearBars = ({
         <rect
           key={n.toString()}
           width={100 / barsArray.length + '%'}
-          height={
-            audioData.length !== 0 ? (audioData[n] / 255) * 100 + '%' : 0
-          }
+          height={audioData.length !== 0 ? (audioData[n] / 255) * 100 + '%' : 0}
           x={(100 / barsArray.length) * n + '%'}
           y={
-            audioData.length !== 0
-              ? 100 - (audioData[n] / 255) * 100 + '%'
-              : 0
+            audioData.length !== 0 ? 100 - (audioData[n] / 255) * 100 + '%' : 0
           }
           style={barsStyles}
         />
