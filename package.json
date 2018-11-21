@@ -1,7 +1,7 @@
 {
   "name": "react-audio-illustrator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sets of React components to visualize audio.",
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/Gejsi/react-audio-illustrator.git"
   },
-  "author": "",
+  "author": "Gejsi <vgejsi@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Gejsi/react-audio-illustrator/issues"
