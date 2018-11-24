@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import Illustrator, { RadialBars } from './index'
+import Illustrator, { LinearBars } from './index'
 
 class App extends Component<any, any> {
   audio: HTMLAudioElement | null
@@ -43,11 +43,7 @@ class App extends Component<any, any> {
                 onPause={stopAnimation}
               />
 
-              <RadialBars
-                bars={52}
-                audioData={audioData}
-                spaceFromCenter={20}
-              />
+              <LinearBars bars={52} audioData={audioData} axis='y-negative' />
             </React.Fragment>
           )}
         />

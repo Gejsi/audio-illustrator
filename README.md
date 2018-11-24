@@ -52,11 +52,12 @@ This is the most basic visualizer: it renders some straight bars.
 
 #### Available properties
 
-| Props      |    Type    |  Default  |                                                    Description |
-| ---------- | :--------: | :-------: | -------------------------------------------------------------: |
-| bars       |   number   |     0     |                  Sets the number of bars that will be rendered |
-| audioData  | Uint8Array | undefined | Passes the audioData received by [Illustrator](#<illustrator>) |
-| barsStyles |   object   |   null    |                             Sets the styles for the inner bars |
+| Props      |                     Type                      |  Default  |                                                    Description |
+| ---------- | :-------------------------------------------: | :-------: | -------------------------------------------------------------: |
+| bars       |                    number                     |     0     |                  Sets the number of bars that will be rendered |
+| audioData  |                  Uint8Array                   | undefined | Passes the audioData received by [Illustrator](#<illustrator>) |
+| axis       | enum: 'y' / 'y-negative' / 'x' / 'x-negative' |     y     |                              Rotates the bars along this value |
+| barsStyles |                    object                     |   null    |                             Sets the styles for the inner bars |
 
 ### `<RadialBars />`
 
