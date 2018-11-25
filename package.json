@@ -2,9 +2,10 @@
   "name": "react-audio-illustrator",
   "version": "1.0.0",
   "description": "Sets of React components to visualize audio.",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "parcel build src/index.ts"
   },
   "repository": {
     "type": "git",
