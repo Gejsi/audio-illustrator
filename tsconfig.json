@@ -8,10 +8,12 @@
     "jsx": "react",
     "moduleResolution": "node",
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "removeComments": true,
     "strictNullChecks": true,
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "declaration": true,
+    "types": ["react", "react-dom"]
   },
-  "types": ["react", "react-dom", "webaudioapi"]
+  "include": ["src/*"],
+  "exclude": ["node_modules", "src/demo.tsx", "dist"]
 }

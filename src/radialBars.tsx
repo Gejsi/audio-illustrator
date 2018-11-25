@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { IBarsProps } from './types'
 
 interface IProps extends IBarsProps {
@@ -12,7 +12,7 @@ interface IState {
   height: number
 }
 
-export class RadialBars extends Component<IProps, IState> {
+export class RadialBars extends React.Component<IProps, IState> {
   private container: SVGSVGElement
 
   state = {
