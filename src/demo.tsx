@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import Illustrator, { LinearBars } from './index'
+import Illustrator, { LinearBars } from 'react-audio-illustrator'
 
 class App extends Component<any, any> {
   audio: HTMLAudioElement | null
