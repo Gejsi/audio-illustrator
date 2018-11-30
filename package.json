@@ -4,8 +4,8 @@
   "description": "Sets of React components to visualize audio.",
   "main": "src/demo.tsx",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build --no-source-maps index.html",
+    "start": "parcel --no-source-maps index.html",
+    "build": "parcel build --no-source-maps index.html --public-url .",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
@@ -37,6 +37,7 @@
   "dependencies": {
     "react": ">= 16.3.0",
     "react-audio-illustrator": "^1.0.0",
-    "react-dom": ">= 16.3.0"
+    "react-dom": ">= 16.3.0",
+    "react-router-dom": "^4.3.1"
   }
 }
