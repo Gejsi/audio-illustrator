@@ -1,32 +1,23 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { normalize } from 'polished'
+import { ThemeProvider } from 'styled-components'
+import { theme, GlobalStyle } from './utils'
 import { Navbar } from './navbar'
+import { Demo } from './demo'
+import { Container } from './container'
 
-const Demo = () => <h1>Demo</h1>
-const Documentation = () => <h1>Docs</h1>
-const NoMatch = () => <h1>404</h1>
+const Documentation = () => (
+  <Container>
+    <h1 style={{ margin: 0 }}>Docs</h1>
+  </Container>
+)
 
-const theme = {
-  text: '#fff',
-  background: '#303030',
-  primary: '#e39be4',
-  secondary: '#1ba897',
-  textOnPrimary: '#000'
-}
-
-const GlobalStyle = createGlobalStyle`
-  ${normalize()};
-  html {
-    font-size: 16px;
-  }
-
-  body {
-    font-family: 'Rubik', sans-serif;
-  }
-`
+const NoMatch = () => (
+  <Container>
+    <h1>404</h1>
+  </Container>
+)
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -38,7 +29,7 @@ const App = () => (
 
         <Switch>
           <Route exact path='/' component={Demo} />
-          <Route path='/docs' component={Documentation} />
+          <Route exact path='/docs' component={Documentation} />
           <Route component={NoMatch} />
         </Switch>
       </React.Fragment>

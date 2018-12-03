@@ -1,16 +1,26 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { rgba, lighten } from 'polished'
+import { NavLink, withRouter } from 'react-router-dom'
+import styled, { withTheme, css } from 'styled-components'
+import { rgba, lighten, darken } from 'polished'
 
 export const Bar = styled.nav`
   height: 72px;
-  background: ${({ theme }) => theme.primary};
-  color: ${({ theme }) => rgba(theme.textOnPrimary, 0.87)};
-  transition: height 150ms;
+  padding: 0 24px;
+  background: ${({ color }) => rgba(color, 0.8)};
+  color: ${({ theme }) => rgba(theme.text, 0.87)};
+  transition: height 150ms, min-width 150ms, background 150ms;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  min-width: 40%;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  box-shadow: ${({ color }) => rgba(color, 0.2)} 0px 2px 4px -1px,
+    ${({ color }) => rgba(color, 0.14)} 0px 4px 5px 0px,
+    ${({ color }) => rgba(color, 0.12)} 0px 1px 10px 0px;
 
   a {
     text-decoration: none;
@@ -18,13 +28,23 @@ export const Bar = styled.nav`
     outline: none;
   }
 
+  ${({ location, theme }) =>
+    location.pathname === '/docs' &&
+    css`
+      min-width: 100%;
+      background: ${theme.primary};
+    `}
+
   @media (max-width: 960px) {
     height: 64px;
+    min-width: 100%;
+    padding: 0;
   }
 `
 
 const GHLink = styled.a`
   display: flex;
+  align-items: center;
 
   h3 {
     text-decoration: underline dotted;
@@ -32,18 +52,21 @@ const GHLink = styled.a`
     font-weight: 500;
     font-size: 1.25rem;
     padding: 0 12px;
+
+    @media (max-width: 960px) {
+      font-size: 1rem;
+    }
   }
 
   &:before,
   &:after {
     content: '•';
-    align-self: center;
     padding: 0 6px;
     font-size: 1.5rem;
   }
 `
 
-const RouterLink = styled(Link)`
+const RouterLink = styled(NavLink)`
   height: 60%;
   display: inline-flex;
   align-items: center;
@@ -55,17 +78,19 @@ const RouterLink = styled(Link)`
 
   &:hover,
   &:focus {
-    background: ${({ theme }) => rgba(theme.text, 0.2)};
+    background: ${({ theme }) => rgba(theme.text, 0.14)};
   }
 
   &:active {
-    background: ${({ theme }) => lighten(0.1, theme.primary)};
+    background: ${({ theme }) => rgba(theme.secondary, 0.4)};
   }
 `
 
-export const Navbar = props => (
-  <Bar {...props}>
-    <RouterLink to='/'>Demo</RouterLink>
+const Nav = withRouter(props => (
+  <Bar location={props.location} color='#12223e'>
+    <RouterLink exact to='/' activeStyle={{ color: props.theme.secondary }}>
+      Demo
+    </RouterLink>
     <GHLink
       href='https://github.com/Gejsi/react-audio-illustrator/'
       target='_blank'
@@ -74,6 +99,10 @@ export const Navbar = props => (
     >
       <h3>react-audio-illustrator</h3>
     </GHLink>
-    <RouterLink to='/docs'>Docs</RouterLink>
+    <RouterLink exact to='/docs' activeStyle={{ color: props.theme.secondary }}>
+      Docs
+    </RouterLink>
   </Bar>
-)
+))
+
+export const Navbar = withTheme(Nav)
