@@ -12,7 +12,7 @@
     "strictNullChecks": true,
     "preserveConstEnums": true,
     "declaration": true,
-    "types": ["react", "react-dom"]
+    "types": ["react", "react-dom", "styled-components"]
   },
   "include": ["src/*"],
   "exclude": ["node_modules", "src/demo.tsx", "dist"]

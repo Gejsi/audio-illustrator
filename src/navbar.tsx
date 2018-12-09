@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled, { withTheme, css } from 'styled-components'
-import { rgba, lighten, darken } from 'polished'
+import { rgba } from 'polished'
 
 export const Bar = styled.nav`
   height: 72px;
