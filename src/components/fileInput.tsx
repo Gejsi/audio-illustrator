@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '../styled-components'
 import { rgba, darken } from 'polished'
 
 export const FileLabel = styled.label.attrs({

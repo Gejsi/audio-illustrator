@@ -3,9 +3,9 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme, GlobalStyle } from './utils'
-import { Navbar } from './navbar'
-import { Demo } from './demo'
-import { Container } from './container'
+import { Navbar } from './components/navbar'
+import { Demo } from './pages/demo'
+import { Container } from './components/container'
 
 const Documentation = () => (
   <Container>

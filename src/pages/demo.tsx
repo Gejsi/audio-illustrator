@@ -1,9 +1,9 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import smallImage from '/static/astronaut-graphic-art-jl-540x960.jpg'
-import bigImage from '/static/astronaut-graphic-art-jl-1920x1080.jpg'
-import { Container } from './container'
-import { FileInput, FileLabel } from './fileInput'
+import styled from '../styled-components'
+import smallImage from '../../static/astronaut-graphic-art-jl-540x960.jpg'
+import bigImage from '../../static/astronaut-graphic-art-jl-1920x1080.jpg'
+import { Container } from '../components/container'
+import { FileInput, FileLabel } from '../components/fileInput'
 
 const Main = styled.div`
   background-image: url(${smallImage});

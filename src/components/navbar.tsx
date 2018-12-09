@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
-import styled, { withTheme, css } from 'styled-components'
+import styled, { withTheme, css } from '../styled-components'
 import { rgba } from 'polished'
 
 export const Bar = styled.nav`
-  height: 72px;
   padding: 0 24px;
   background: ${({ color }) => rgba(color, 0.8)};
   color: ${({ theme }) => rgba(theme.text, 0.87)};
@@ -86,9 +85,9 @@ const RouterLink = styled(NavLink)`
   }
 `
 
-const Nav = withRouter(props => (
-  <Bar location={props.location} color='#12223e'>
-    <RouterLink exact to='/' activeStyle={{ color: props.theme.secondary }}>
+const Nav = ({ location, theme }) => (
+  <Bar location={location} color='#12223e'>
+    <RouterLink exact to='/' activeStyle={{ color: theme.secondary }}>
       Demo
     </RouterLink>
     <GHLink
@@ -99,10 +98,10 @@ const Nav = withRouter(props => (
     >
       <h3>react-audio-illustrator</h3>
     </GHLink>
-    <RouterLink exact to='/docs' activeStyle={{ color: props.theme.secondary }}>
+    <RouterLink exact to='/docs' activeStyle={{ color: theme.secondary }}>
       Docs
     </RouterLink>
   </Bar>
-))
+)
 
-export const Navbar = withTheme(Nav)
+export const Navbar = withTheme(withRouter(Nav))
