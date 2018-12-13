@@ -5,6 +5,7 @@ import { rgba } from 'polished'
 
 export const Bar = styled.nav`
   padding: 0 24px;
+  height: 72px;
   background: ${({ color }) => rgba(color, 0.8)};
   color: ${({ theme }) => rgba(theme.text, 0.87)};
   transition: height 150ms, min-width 150ms, background 150ms;
