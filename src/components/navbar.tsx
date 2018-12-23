@@ -6,7 +6,7 @@ import { rgba } from 'polished'
 export const Bar = styled.nav`
   padding: 0 24px;
   height: 72px;
-  background: ${({ color }) => rgba(color, 0.8)};
+  background: ${({ theme }) => rgba(theme.tertiary, 0.8)};
   color: ${({ theme }) => rgba(theme.text, 0.87)};
   transition: height 150ms, min-width 150ms, background 150ms;
   display: flex;
@@ -18,9 +18,9 @@ export const Bar = styled.nav`
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  box-shadow: ${({ color }) => rgba(color, 0.2)} 0px 2px 4px -1px,
-    ${({ color }) => rgba(color, 0.14)} 0px 4px 5px 0px,
-    ${({ color }) => rgba(color, 0.12)} 0px 1px 10px 0px;
+  box-shadow: ${({ theme }) => rgba(theme.tertiary, 0.2)} 0px 2px 4px -1px,
+    ${({ theme }) => rgba(theme.tertiary, 0.14)} 0px 4px 5px 0px,
+    ${({ theme }) => rgba(theme.tertiary, 0.12)} 0px 1px 10px 0px;
 
   a {
     text-decoration: none;
@@ -87,7 +87,7 @@ const RouterLink = styled(NavLink)`
 `
 
 const Nav = ({ location, theme }) => (
-  <Bar location={location} color='#12223e'>
+  <Bar location={location}>
     <RouterLink exact to='/' activeStyle={{ color: theme.secondary }}>
       Demo
     </RouterLink>

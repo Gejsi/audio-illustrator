@@ -1,9 +1,23 @@
 import * as React from 'react'
 import styled from '../styled-components'
+import Illustrator from 'react-audio-illustrator'
 import smallImage from '../../static/astronaut-graphic-art-jl-540x960.jpg'
 import bigImage from '../../static/astronaut-graphic-art-jl-1920x1080.jpg'
 import { Container } from '../components/container'
-import { FileInput, FileLabel } from '../components/fileInput'
+import { FileInput } from '../components/fileInput'
+import { AudioControls } from '../components/audioControls'
+import { Visualizer } from '../components/visualizer'
+
+interface IState {
+  file: File
+  song: string
+  isPlaying: boolean
+  isVisible: boolean
+  duration: number
+  timeValue: number
+  muted: boolean
+  volumeValue: string
+}
 
 const Main = styled.div`
   background-image: url(${smallImage});
@@ -19,39 +33,147 @@ const Main = styled.div`
   }
 `
 
-export class Demo extends React.Component<any, { song: File }> {
+const Wrapper = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+`
+
+export class Demo extends React.Component<null, IState> {
+  audio: HTMLAudioElement
+
   state = {
-    song: {} as File
+    file: {} as File,
+    song: '',
+    isPlaying: false,
+    isVisible: false,
+    duration: 0,
+    timeValue: 0,
+    muted: false,
+    volumeValue: '1'
   }
 
-  handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    const song = target.files && target.files[0]
+  private setRef = e => (this.audio = e)
 
-    if (song) this.setState({ song: song })
+  private handleChange = (
+    stopAnimation,
+    { target }: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = target.files && target.files[0]
+    const song = file && URL.createObjectURL(target.files![0])
+
+    if (file) {
+      this.setState({ file, isVisible: true })
+    }
+
+    if (song) {
+      stopAnimation()
+      this.setState({ song })
+    }
+  }
+
+  private handlePlay = startAnimation => {
+    this.setState({ isPlaying: true })
+    startAnimation()
+  }
+
+  private handlePause = stopAnimation => {
+    this.setState({ isPlaying: false })
+    stopAnimation()
+  }
+
+  private onButtonClick = () => {
+    if (this.state.song) {
+      if (this.state.isPlaying) this.audio.pause()
+      else this.audio.play()
+    }
+  }
+
+  private handleLoadedData = () => {
+    if (this.state.song) this.setState({ duration: this.audio.duration })
+  }
+
+  private handleTimeUpdate = () => {
+    this.setState({ timeValue: this.audio.currentTime })
+  }
+
+  private handleTimeInput = ({
+    target
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    this.audio.currentTime = target.valueAsNumber
+    this.setState({ muted: true })
+  }
+
+  private handleTimeChange = () => {
+    this.setState({ muted: false })
+  }
+
+  private handleVolumeInput = ({
+    target
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ volumeValue: target.value })
+
+    this.audio.volume = target.valueAsNumber
   }
 
   render() {
-    const { song } = this.state
+    const {
+      file,
+      song,
+      isPlaying,
+      duration,
+      timeValue,
+      muted,
+      volumeValue,
+      isVisible
+    } = this.state
 
     return (
       <Main>
-        <Container>
-          <FileInput onChange={this.handleChange} />
-          <FileLabel tabIndex={-1}>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 512 512'
-              width='24'
-              height='24'
-            >
-              <path
-                fill='currentColor'
-                d='M296 384h-80c-13.3 0-24-10.7-24-24V192h-87.7c-17.8 0-26.7-21.5-14.1-34.1L242.3 5.7c7.5-7.5 19.8-7.5 27.3 0l152.2 152.2c12.6 12.6 3.7 34.1-14.1 34.1H320v168c0 13.3-10.7 24-24 24zm216-8v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h136v8c0 30.9 25.1 56 56 56h80c30.9 0 56-25.1 56-56v-8h136c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z'
-              />
-            </svg>
-            <span>{song.name || 'Upload a file'}</span>
-          </FileLabel>
-        </Container>
+        <Wrapper>
+          <Illustrator audioRef={this.audio}>
+            {({ audioData, startAnimation, stopAnimation }) => (
+              <React.Fragment>
+                <FileInput
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    this.handleChange(stopAnimation, e)
+                  }
+                  text={file.name}
+                />
+
+                <audio
+                  ref={this.setRef}
+                  src={song ? song : undefined}
+                  autoPlay
+                  onPlay={() => this.handlePlay(startAnimation)}
+                  onPause={() => this.handlePause(stopAnimation)}
+                  onLoadedData={this.handleLoadedData}
+                  onTimeUpdate={this.handleTimeUpdate}
+                  muted={muted}
+                />
+                <Visualizer
+                  isPlaying={isPlaying}
+                  onButtonClick={this.onButtonClick}
+                  audioData={audioData}
+                  visible={isVisible}
+                />
+                <AudioControls
+                  duration={duration}
+                  timeValue={timeValue}
+                  onTimeInput={this.handleTimeInput}
+                  onTimeChange={this.handleTimeChange}
+                  onMute={() => this.setState({ muted: !muted })}
+                  muted={muted}
+                  volumeValue={volumeValue}
+                  onVolumeInput={this.handleVolumeInput}
+                  visible={isVisible}
+                />
+              </React.Fragment>
+            )}
+          </Illustrator>
+        </Wrapper>
       </Main>
     )
   }

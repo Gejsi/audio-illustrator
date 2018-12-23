@@ -6,6 +6,7 @@ interface ITheme {
   background: string
   primary: string
   secondary: string
+  tertiary: string
   textOnPrimary: string
 }
 

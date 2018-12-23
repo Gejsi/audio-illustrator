@@ -1,6 +1,9 @@
 import * as React from 'react'
 import styled, { css } from '../styled-components'
 import { rgba } from 'polished'
+import { humanizeTime } from '../utils'
+import { IconButton } from './iconButton'
+import { VolumeOff, VolumeOn } from '../icons'
 
 const thumbStyles = css`
   height: 12px;
@@ -11,10 +14,7 @@ const thumbStyles = css`
   transition: box-shadow 150ms;
 `
 
-export const Slider = styled.input.attrs({
-  type: 'range',
-  defaultValue: '0'
-})`
+export const Slider = styled.input`
   -webkit-appearance: none;
   width: 100%;
   background: transparent;
@@ -78,13 +78,14 @@ export const Slider = styled.input.attrs({
   }
 `
 
-const Container = styled.div`
+const Container = styled.div<{ visible: boolean }>`
   display: flex;
   align-items: center;
   color: inherit;
   width: 80%;
   margin: 0 auto 32px auto;
-  transition: width 150ms;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transition: width 150ms, opacity 400ms;
 
   @media (max-width: 540px) {
     width: 100%;
@@ -109,7 +110,6 @@ const VolumeSlider = styled.div`
     fill: currentColor;
     opacity: 0.87;
     align-self: center;
-    padding-left: 8px;
   }
 
   input {
@@ -117,23 +117,61 @@ const VolumeSlider = styled.div`
   }
 `
 
-export const AudioControls = ({ ...rest }) => (
-  <Container {...rest}>
+interface IProps {
+  duration: number
+  timeValue: number
+  onTimeInput: (event: React.FormEvent<HTMLInputElement>) => void
+  onTimeChange: (
+    event:
+      | React.MouseEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void
+  onMute: (event: React.MouseEvent<HTMLButtonElement>) => void
+  muted: boolean
+  volumeValue: string
+  onVolumeInput: (event: React.ChangeEvent<HTMLInputElement>) => void
+  visible: boolean
+}
+
+export const AudioControls = ({
+  duration,
+  timeValue,
+  onTimeInput,
+  onTimeChange,
+  onMute,
+  muted,
+  volumeValue,
+  onVolumeInput,
+  visible,
+  ...rest
+}: IProps) => (
+  <Container {...rest} visible={visible}>
     <TimeSlider>
-      <span>0:00</span>
-      <Slider />
-      <span>2:38</span>
+      <span>{humanizeTime(timeValue)}</span>
+      <Slider
+        type='range'
+        onInput={onTimeInput}
+        onMouseUp={onTimeChange}
+        onKeyUp={onTimeChange}
+        min='0'
+        max={duration}
+        value={timeValue}
+        readOnly
+      />
+      <span>{humanizeTime(duration)}</span>
     </TimeSlider>
     <VolumeSlider>
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'
-      >
-        <path d='M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z' />
-      </svg>
-      <Slider />
+      <IconButton onClick={onMute}>
+        {muted ? <VolumeOff /> : <VolumeOn />}
+      </IconButton>
+      <Slider
+        type='range'
+        onChange={onVolumeInput}
+        value={volumeValue}
+        min='0'
+        max='1'
+        step='0.01'
+      />
     </VolumeSlider>
   </Container>
 )
