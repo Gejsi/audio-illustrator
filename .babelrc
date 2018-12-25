@@ -1,4 +1,15 @@
 {
   "presets": ["react-app"],
-  "plugins": ["transform-class-properties"]
+  "plugins": [
+    "transform-class-properties",
+    [
+      "prismjs",
+      {
+        "languages": ["jsx"],
+        "plugins": ["line-numbers"],
+        "theme": "okaidia",
+        "css": true
+      }
+    ]
+  ]
 }

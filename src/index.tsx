@@ -5,19 +5,8 @@ import { ThemeProvider } from 'styled-components'
 import { theme, GlobalStyle } from './utils'
 import { Navbar } from './components/navbar'
 import { Demo } from './pages/demo'
-import { Container } from './components/container'
-
-const Documentation = () => (
-  <Container>
-    <h1 style={{ margin: 0 }}>Docs</h1>
-  </Container>
-)
-
-const NoMatch = () => (
-  <Container>
-    <h1>404</h1>
-  </Container>
-)
+import { Docs } from './pages/docs'
+import { NoMatch } from './pages/404'
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -29,7 +18,7 @@ const App = () => (
 
         <Switch>
           <Route exact path='/' component={Demo} />
-          <Route exact path='/docs' component={Documentation} />
+          <Route exact path='/docs' component={Docs} />
           <Route component={NoMatch} />
         </Switch>
       </React.Fragment>

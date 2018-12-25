@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Rubik', sans-serif;
+    background: ${({ theme }) => theme.background};
 
     #root {
       height: 100vh;
