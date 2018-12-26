@@ -1,8 +1,12 @@
 import * as React from 'react'
-import { IBarsProps } from './types'
+import { getAverage } from './utils'
 
-interface IProps extends IBarsProps {
+interface IProps {
+  bars: number
+  audioData: Uint8Array
+  barsStyles?: object
   axis?: string
+  [rest: string]: any
 }
 
 /**
@@ -49,7 +53,8 @@ export const LinearBars = ({
   axis,
   ...rest
 }: IProps) => {
-  const barsArray: number[] = Array.from({ length: bars }, (v, k) => k)
+  const barsArray: number[] = Array.from({ length: bars }, (_, k) => k)
+  const data = getAverage(audioData, 129 / bars)
 
   return (
     <svg width='100%' height='100%' {...rest}>
@@ -57,36 +62,36 @@ export const LinearBars = ({
         <rect
           key={n.toString()}
           width={
-            audioData.length !== 0
+            data.length !== 0
               ? getAxis('width', axis)(
-                  (audioData[n] / 255) * 100,
+                  (data[n] / 255) * 100,
                   100 / barsArray.length
                 ) + '%'
               : undefined
           }
           height={
-            audioData.length !== 0
+            data.length !== 0
               ? getAxis('height', axis)(
                   100 / barsArray.length,
-                  (audioData[n] / 255) * 100
+                  (data[n] / 255) * 100
                 ) + '%'
               : undefined
           }
           x={
-            audioData.length !== 0
+            data.length !== 0
               ? getAxis('x', axis)(
                   0,
-                  100 - (audioData[n] / 255) * 100,
+                  100 - (data[n] / 255) * 100,
                   (100 / barsArray.length) * n
                 ) + '%'
               : undefined
           }
           y={
-            audioData.length !== 0
+            data.length !== 0
               ? getAxis('y', axis)(
                   (100 / barsArray.length) * n,
                   0,
-                  100 - (audioData[n] / 255) * 100
+                  100 - (data[n] / 255) * 100
                 ) + '%'
               : undefined
           }

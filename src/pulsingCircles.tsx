@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { getAverage } from './utils'
 
 interface IProps {
   circles: number
@@ -13,7 +14,8 @@ export const PulsingCircles = ({
   circlesStyles,
   ...rest
 }: IProps) => {
-  const circlesArray: number[] = Array.from({ length: circles }, (v, k) => k)
+  const circlesArray: number[] = Array.from({ length: circles }, (_, k) => k)
+  const data = getAverage(audioData, 129 / circles)
 
   return (
     <svg width='100%' height='100%' {...rest}>
@@ -22,7 +24,7 @@ export const PulsingCircles = ({
           key={n.toString()}
           cx='50%'
           cy='50%'
-          r={audioData.length !== 0 ? (audioData[n] / 255) * 50 + '%' : 0}
+          r={data.length !== 0 ? (data[n] / 255) * 50 + '%' : 0}
           fill='none'
           strokeWidth={2}
           stroke='black'

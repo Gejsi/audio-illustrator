@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react'
-import { hasRender, hasChildren } from './types'
+import { hasRender, hasChildren } from './utils'
 
 type IProps = { audioRef: HTMLAudioElement | null } & RenderProps
 

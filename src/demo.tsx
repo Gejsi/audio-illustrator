@@ -5,8 +5,7 @@ import Illustrator, { LinearBars } from './index'
 class App extends Component<any, any> {
   audio: HTMLAudioElement | null
   state = {
-    song: '',
-    rotate: 0
+    song: ''
   }
 
   handleChange = ({ target }) => {
@@ -43,7 +42,7 @@ class App extends Component<any, any> {
                 onPause={stopAnimation}
               />
 
-              <LinearBars bars={52} audioData={audioData} axis='y-negative' />
+              <LinearBars bars={22} audioData={audioData} />
             </React.Fragment>
           )}
         />

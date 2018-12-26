@@ -1,7 +1,7 @@
 <h1 align="center">React Audio Illustrator</h1>
 <h4 align="center">
   Visualize audio easily by creating highly customizable illustrators. <br />
-  If you are lazy, don't worry, I have already made a bunch of them 😉.
+  If you are lazy, don't worry! I have already made two of them 😉.
 </h4>
 
 ## Basic Usage
@@ -9,23 +9,38 @@
 Setting up an Illustrator is very quick:
 
 ```jsx
+import React from 'react'
 import Illustrator, { LinearBars } from 'react-audio-illustrator'
-// Rest of the class
-<Illustrator
-  audioRef={this.audio}
-  render={({ audioData, startAnimation, stopAnimation }) => (
-    <React.Fragment>
-      <audio
-        ref={e => (this.audio = e)}
-        src={this.state.song ? this.state.song : undefined}
-        onPlay={this.state.song ? startAnimation : undefined}
-        onPause={stopAnimation}
-      />
 
-      <LinearBars bars={52} audioData={audioData} />
-    </React.Fragment>
-  )}
-/>
+export class Demo extends React.Component {
+  state = {
+    song: ''
+  }
+
+  componentDidMount() {
+    // fetch song from somewhere
+  }
+
+  render() {
+    return (
+      <Illustrator
+        audioRef={this.audio}
+        render={({ audioData, startAnimation, stopAnimation }) => (
+          <React.Fragment>
+            <audio
+              ref={e => (this.audio = e)}
+              src={this.state.song ? this.state.song : undefined}
+              onPlay={this.state.song ? startAnimation : undefined}
+              onPause={stopAnimation}
+            />
+
+            <LinearBars bars={22} audioData={audioData} />
+          </React.Fragment>
+        )}
+      />
+    )
+  }
+}
 ```
 
 ## Documentation
@@ -55,24 +70,9 @@ This is the most basic visualizer: it renders some straight bars.
 | Props      |                     Type                      |  Default  |                                                    Description |
 | ---------- | :-------------------------------------------: | :-------: | -------------------------------------------------------------: |
 | bars       |                    number                     |     0     |                  Sets the number of bars that will be rendered |
-| audioData  |                  Uint8Array                   | undefined | Passes the audioData received by [Illustrator](#<illustrator>) |
+| audioData  |                  Uint8Array                   | undefined | Passes the audioData received by [Illustrator](#illustrator->) |
 | axis       | enum: 'y' / 'y-negative' / 'x' / 'x-negative' |     y     |                              Rotates the bars along this value |
 | barsStyles |                    object                     |   null    |                             Sets the styles for the inner bars |
-
-### `<RadialBars />`
-
-This visualizer renders bars in a radial arrangement.
-
-#### Available properties
-
-| Props           |    Type    |  Default  |                                                    Description |
-| --------------- | :--------: | :-------: | -------------------------------------------------------------: |
-| bars            |   number   |     0     |                  Sets the number of bars that will be rendered |
-| audioData       | Uint8Array | undefined | Passes the audioData received by [Illustrator](#<illustrator>) |
-| barsStyles      |   object   |   null    |                             Sets the styles for the inner bars |
-| maxHeight       |   number   |    10     |    Sets the max height of the inner bars to be this percentage |
-| gap             |   number   |    20     |                                  Sets the gap between each bar |
-| spaceFromCenter |   number   |     0     |                                Pushes the bars from the center |
 
 ### `<PulsingCircles />`
 
@@ -83,5 +83,5 @@ This visualizer renders circles from the center of the svg.
 | Props      |    Type    |  Default  |                                                    Description |
 | ---------- | :--------: | :-------: | -------------------------------------------------------------: |
 | circles    |   number   |     0     |               Sets the number of circles that will be rendered |
-| audioData  | Uint8Array | undefined | Passes the audioData received by [Illustrator](#<illustrator>) |
+| audioData  | Uint8Array | undefined | Passes the audioData received by [Illustrator](#illustrator->) |
 | barsStyles |   object   |   null    |                          Sets the styles for the inner circles |
