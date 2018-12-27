@@ -1,12 +1,12 @@
 {
   "name": "react-audio-illustrator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sets of React components to visualize audio.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "parcel index.html",
-    "build": "tsc && parcel build --no-source-maps dist/illustrator.js dist/index.js dist/linearBars.js dist/pulsingCircles.js dist/radialBars.js dist/types.js"
+    "build": "tsc && parcel build --no-source-maps dist/illustrator.js dist/index.js dist/linearBars.js dist/pulsingCircles.js dist/utils.js"
   },
   "repository": {
     "type": "git",

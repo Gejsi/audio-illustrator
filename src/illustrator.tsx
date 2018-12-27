@@ -36,7 +36,7 @@ export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
     }
   }
 
-  private startLoop = () => {
+  startLoop = () => {
     this.id = requestAnimationFrame(this.startLoop)
 
     const bufferLength: number = this.analyser.frequencyBinCount
@@ -46,11 +46,11 @@ export class Illustrator extends Component<IProps, { audioData: Uint8Array }> {
     this.setState({ audioData: dataArray })
   }
 
-  private stopLoop = () => {
+  stopLoop = () => {
     cancelAnimationFrame(this.id)
   }
 
-  private renderData = () => {
+  renderData = () => {
     return {
       audioData: this.state.audioData,
       startAnimation: this.startLoop,
