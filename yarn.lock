@@ -4220,9 +4220,9 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-audio-illustrator@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-audio-illustrator/-/react-audio-illustrator-1.0.0.tgz#5c2114abdbe3a6746e4b3ec40d67876218ccbb3e"
+react-audio-illustrator@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-audio-illustrator/-/react-audio-illustrator-1.0.1.tgz#bd600e6e8f1fe7fef5b2fcff4531691a44c0e8cc"
   dependencies:
     react ">= 16.3.0"
     react-dom ">= 16.3.0"

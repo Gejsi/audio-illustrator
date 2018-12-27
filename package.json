@@ -42,7 +42,7 @@
     "polished": "^2.3.1",
     "prismjs": "^1.15.0",
     "react": ">= 16.3.0",
-    "react-audio-illustrator": "^1.0.0",
+    "react-audio-illustrator": "^1.0.1",
     "react-dom": ">= 16.3.0",
     "react-router-dom": "^4.3.1",
     "styled-components": "^4.1.2"
