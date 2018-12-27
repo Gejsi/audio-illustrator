@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme, GlobalStyle } from './utils'
 import { Navbar } from './components/navbar'
