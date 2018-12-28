@@ -3,6 +3,7 @@ import styled from '../styled-components'
 import Illustrator from 'react-audio-illustrator'
 import smallImage from '../../static/astronaut-graphic-art-jl-540x960.jpg'
 import bigImage from '../../static/astronaut-graphic-art-jl-1920x1080.jpg'
+import localSong from '../../static/amstergates.mp3'
 import { Container } from '../components/container'
 import { FileInput } from '../components/fileInput'
 import { AudioControls } from '../components/audioControls'
@@ -12,11 +13,10 @@ interface IState {
   file: File
   song: string
   isPlaying: boolean
-  isVisible: boolean
   duration: number
   timeValue: number
   muted: boolean
-  volumeValue: string
+  volumeValue: number
 }
 
 const Main = styled.div`
@@ -48,11 +48,16 @@ export class Demo extends React.Component<null, IState> {
     file: {} as File,
     song: '',
     isPlaying: false,
-    isVisible: false,
     duration: 0,
     timeValue: 0,
     muted: false,
-    volumeValue: '1'
+    volumeValue: 0.1
+  }
+
+  componentDidMount() {
+    this.audio.volume = this.state.volumeValue
+
+    this.setState({ song: localSong })
   }
 
   private setRef = e => (this.audio = e)
@@ -65,7 +70,7 @@ export class Demo extends React.Component<null, IState> {
     const song = file && URL.createObjectURL(target.files![0])
 
     if (file) {
-      this.setState({ file, isVisible: true })
+      this.setState({ file })
     }
 
     if (song) {
@@ -113,7 +118,7 @@ export class Demo extends React.Component<null, IState> {
   private handleVolumeInput = ({
     target
   }: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ volumeValue: target.value })
+    this.setState({ volumeValue: target.valueAsNumber })
 
     this.audio.volume = target.valueAsNumber
   }
@@ -126,8 +131,7 @@ export class Demo extends React.Component<null, IState> {
       duration,
       timeValue,
       muted,
-      volumeValue,
-      isVisible
+      volumeValue
     } = this.state
 
     return (
@@ -153,12 +157,13 @@ export class Demo extends React.Component<null, IState> {
                   onTimeUpdate={this.handleTimeUpdate}
                   muted={muted}
                 />
+
                 <Visualizer
                   isPlaying={isPlaying}
                   onButtonClick={this.onButtonClick}
                   audioData={audioData}
-                  visible={isVisible}
                 />
+
                 <AudioControls
                   duration={duration}
                   timeValue={timeValue}
@@ -168,7 +173,6 @@ export class Demo extends React.Component<null, IState> {
                   muted={muted}
                   volumeValue={volumeValue}
                   onVolumeInput={this.handleVolumeInput}
-                  visible={isVisible}
                 />
               </React.Fragment>
             )}

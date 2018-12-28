@@ -78,14 +78,13 @@ export const Slider = styled.input`
   }
 `
 
-const Container = styled.div<{ visible: boolean }>`
+const Container = styled.div`
   display: flex;
   align-items: center;
   color: inherit;
   width: 80%;
   margin: 0 auto 32px auto;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: width 150ms, opacity 400ms;
+  transition: width 150ms;
 
   @media (max-width: 540px) {
     width: 100%;
@@ -128,9 +127,8 @@ interface IProps {
   ) => void
   onMute: (event: React.MouseEvent<HTMLButtonElement>) => void
   muted: boolean
-  volumeValue: string
+  volumeValue: number
   onVolumeInput: (event: React.ChangeEvent<HTMLInputElement>) => void
-  visible: boolean
 }
 
 export const AudioControls = ({
@@ -141,11 +139,10 @@ export const AudioControls = ({
   onMute,
   muted,
   volumeValue,
-  onVolumeInput,
-  visible,
+  onVolumeInput
   ...rest
 }: IProps) => (
-  <Container {...rest} visible={visible}>
+  <Container {...rest}>
     <TimeSlider>
       <span>{humanizeTime(timeValue)}</span>
       <Slider

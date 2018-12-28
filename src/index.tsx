@@ -10,7 +10,7 @@ import { NoMatch } from './pages/404'
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Router basename='/react-audio-illustrator'>
+    <Router>
       <React.Fragment>
         <GlobalStyle />
 

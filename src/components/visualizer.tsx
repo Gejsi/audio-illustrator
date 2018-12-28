@@ -4,12 +4,10 @@ import styled from '../styled-components'
 import { IconButton } from './iconButton'
 import { PauseIcon, PlayIcon } from '../icons'
 
-const Container = styled.div<{ visible: boolean }>`
+const Container = styled.div`
   flex: 0.75;
   display: flex;
   align-items: center;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: opacity 400ms;
 `
 
 const Bars = styled(LinearBars)`
@@ -27,17 +25,11 @@ interface IProps {
   isPlaying: boolean
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void
   audioData: Uint8Array
-  visible: boolean
 }
 
-export const Visualizer = ({
-  isPlaying,
-  onButtonClick,
-  audioData,
-  visible
-}: IProps) => (
+export const Visualizer = ({ isPlaying, onButtonClick, audioData }: IProps) => (
   <React.Fragment>
-    <Container visible={visible}>
+    <Container>
       <IconButton
         style={{
           border: '2px solid currentColor',
