@@ -70,6 +70,13 @@ const Wrapper = styled.div`
       padding: 0 ${rem(16)};
       font-size: ${rem(14)};
     }
+
+    @media (max-width: 960px) {
+      th,
+      td {
+        padding: ${rem(8)};
+      }
+    }
   }
 
   a:link {

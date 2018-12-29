@@ -48,6 +48,7 @@ const GHLink = styled.a`
 
   h3 {
     text-decoration: underline dotted;
+    text-align: center;
     margin: 0;
     font-weight: 500;
     font-size: 1.25rem;

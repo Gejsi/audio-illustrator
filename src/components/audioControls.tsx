@@ -124,6 +124,7 @@ interface IProps {
     event:
       | React.MouseEvent<HTMLInputElement>
       | React.KeyboardEvent<HTMLInputElement>
+      | React.TouchEvent<HTMLInputElement>
   ) => void
   onMute: (event: React.MouseEvent<HTMLButtonElement>) => void
   muted: boolean
@@ -139,7 +140,7 @@ export const AudioControls = ({
   onMute,
   muted,
   volumeValue,
-  onVolumeInput
+  onVolumeInput,
   ...rest
 }: IProps) => (
   <Container {...rest}>
@@ -150,6 +151,7 @@ export const AudioControls = ({
         onInput={onTimeInput}
         onMouseUp={onTimeChange}
         onKeyUp={onTimeChange}
+        onTouchEnd={onTimeChange}
         min='0'
         max={duration}
         value={timeValue}

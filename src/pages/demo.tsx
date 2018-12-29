@@ -38,7 +38,7 @@ const Wrapper = styled(Container)`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  overflow: none;
 `
 
 export class Demo extends React.Component<null, IState> {
