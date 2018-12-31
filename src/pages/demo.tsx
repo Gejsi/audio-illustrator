@@ -17,6 +17,7 @@ interface IState {
   muted: boolean
   volumeValue: number
   audioData: Uint8Array | number[]
+  isConnected: boolean
 }
 
 const Main = styled.div`
@@ -53,7 +54,8 @@ export class Demo extends React.Component<null, IState> {
     timeValue: 0,
     muted: false,
     volumeValue: 0.1,
-    audioData: new Uint8Array(0)
+    audioData: new Uint8Array(0),
+    isConnected: false
   }
 
   componentDidMount() {
@@ -68,7 +70,10 @@ export class Demo extends React.Component<null, IState> {
   private setRef = e => (this.audio = e)
 
   private handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    this.illustrator.connect(this.audio)
+    this.setState({ isConnected: true })
+
+    if (!this.state.isConnected) this.illustrator.connect(this.audio)
+
     const file = target.files && target.files[0]
     const song = file && URL.createObjectURL(target.files![0])
 
