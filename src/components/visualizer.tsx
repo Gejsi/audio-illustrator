@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { LinearBars } from 'react-audio-illustrator'
 import styled from '../styled-components'
 import { IconButton } from './iconButton'
 import { PauseIcon, PlayIcon } from '../icons'
@@ -30,7 +29,7 @@ const Button = styled(IconButton)`
   }
 `
 
-const Bars = styled(LinearBars)`
+const Bars = styled.svg`
   height: 40%;
   width: 80%;
   fill: ${({ theme }) => theme.secondary};
@@ -40,6 +39,26 @@ const Bars = styled(LinearBars)`
     width: 100%;
   }
 `
+
+const LinearBars = ({ bars, audioData }) => {
+  const barsArray: number[] = Array.from({ length: bars }, (_, k) => k)
+
+  return (
+    <Bars>
+      {barsArray.map(n => (
+        <rect
+          key={n.toString()}
+          width={100 / barsArray.length + '%'}
+          height={audioData.length !== 0 ? (audioData[n] / 255) * 100 + '%' : 0}
+          x={(100 / barsArray.length) * n + '%'}
+          y={
+            audioData.length !== 0 ? 100 - (audioData[n] / 255) * 100 + '%' : 0
+          }
+        />
+      ))}
+    </Bars>
+  )
+}
 
 interface IProps {
   isPlaying: boolean
@@ -54,6 +73,6 @@ export const Visualizer = ({ isPlaying, onButtonClick, audioData }: IProps) => (
         {isPlaying ? <PauseIcon /> : <PlayIcon />}
       </Button>
     </Container>
-    <Bars bars={32} audioData={audioData} />
+    <LinearBars bars={22} audioData={audioData} />
   </React.Fragment>
 )

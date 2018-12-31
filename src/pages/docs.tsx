@@ -7,7 +7,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 import 'prismjs/themes/prism-okaidia.css'
 import styled from '../styled-components'
 import { Container } from '../components/container'
-import { rem, rgba, darken } from 'polished'
+import { rem, darken } from 'polished'
 
 const Wrapper = styled.div`
   [align='center'] {
@@ -33,6 +33,14 @@ const Wrapper = styled.div`
     font-size: ${rem(12)};
     letter-spacing: ${rem(1)};
     text-transform: uppercase;
+    margin: ${rem(32)} 0;
+
+    code {
+      background: #272822;
+      padding: ${rem(8)};
+      text-transform: initial;
+      font-size: ${rem(14)};
+    }
   }
 
   p {
@@ -42,54 +50,12 @@ const Wrapper = styled.div`
     letter-spacing: ${rem(0.25)};
   }
 
-  ul {
-    padding-left: ${rem(32)};
-    font-size: ${rem(14)};
-  }
-
-  table {
-    border-collapse: collapse;
-    margin: ${rem(16)} 0;
-
-    th {
-      height: ${rem(48)};
-      border-width: 0 ${rem(1)};
-      border-style: solid;
-      border-color: ${({ theme }) => rgba(theme.text, 0.12)};
-      padding: 0 ${rem(16)};
-      font-weight: 400;
-      font-size: ${rem(12)};
-      color: ${({ theme }) => rgba(theme.text, 0.6)};
-    }
-
-    td {
-      height: ${rem(48)};
-      border-width: 0 ${rem(1)};
-      border-style: solid;
-      border-color: ${({ theme }) => rgba(theme.text, 0.12)};
-      padding: 0 ${rem(16)};
-      font-size: ${rem(14)};
-    }
-
-    @media (max-width: 960px) {
-      th,
-      td {
-        padding: ${rem(8)};
-      }
-    }
-  }
-
   a:link {
     color: ${({ theme }) => theme.secondary};
   }
 
   a:visited {
     color: ${({ theme }) => darken(0.15, theme.secondary)};
-  }
-
-  code {
-    background: #272822;
-    padding: ${rem(2)} ${rem(4)};
   }
 
   @media (max-width: 960px) {

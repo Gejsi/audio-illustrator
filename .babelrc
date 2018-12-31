@@ -5,7 +5,7 @@
     [
       "prismjs",
       {
-        "languages": ["jsx"],
+        "languages": ["jsx, javascript"],
         "plugins": ["line-numbers"],
         "theme": "okaidia",
         "css": true

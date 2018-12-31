@@ -317,6 +317,12 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
+"@babel/plugin-syntax-async-generators@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.2.0.tgz#69e1f0db34c6f5a0cf7e2b3323bf159a76c8cb7f"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+
 "@babel/plugin-syntax-class-properties@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0.tgz#e051af5d300cbfbcec4a7476e37a803489881634"
@@ -942,6 +948,10 @@ async@^2.6.1:
 atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
+
+audio-illustrator@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/audio-illustrator/-/audio-illustrator-1.0.4.tgz#80b40c21edcde0beb070bf317834263427cdc973"
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -4109,7 +4119,7 @@ prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
-prismjs@^1.15.0:
+prismjs@^1.0.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.15.0.tgz#8801d332e472091ba8def94976c8877ad60398d9"
   optionalDependencies:
@@ -4219,13 +4229,6 @@ rc@^1.2.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
-
-react-audio-illustrator@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-audio-illustrator/-/react-audio-illustrator-1.0.1.tgz#bd600e6e8f1fe7fef5b2fcff4531691a44c0e8cc"
-  dependencies:
-    react ">= 16.3.0"
-    react-dom ">= 16.3.0"
 
 "react-dom@>= 16.3.0":
   version "16.6.0"
