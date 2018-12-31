@@ -5,16 +5,13 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "target": "es6",
-    "jsx": "react",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
     "strictNullChecks": true,
     "preserveConstEnums": true,
-    "declaration": true,
-    "types": ["react", "react-dom"]
+    "declaration": true
   },
-  "include": ["src/*"],
-  "exclude": ["node_modules", "src/demo.tsx", "dist"]
+  "files": ["index.ts"]
 }

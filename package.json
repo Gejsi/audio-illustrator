@@ -1,12 +1,11 @@
 {
-  "name": "react-audio-illustrator",
-  "version": "1.0.1",
+  "name": "audio-illustrator",
+  "version": "1.0.2",
   "description": "Sets of React components to visualize audio.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "tsc && parcel build --no-source-maps dist/illustrator.js dist/index.js dist/linearBars.js dist/pulsingCircles.js dist/utils.js"
+    "build": "tsc && parcel build --no-source-maps dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -14,7 +13,6 @@
   },
   "author": "Gejsi <vgejsi@gmail.com>",
   "keywords": [
-    "react",
     "audio",
     "visualizer",
     "illustrator"
@@ -26,16 +24,10 @@
   "homepage": "https://github.com/Gejsi/react-audio-illustrator#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
-    "@types/react": "^16.7.6",
-    "@types/react-dom": "^16.0.9",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-react-app": "^6.0.0",
+    "babel-preset-react-app": "^7.0.0",
     "parcel-bundler": "^1.10.3",
     "typescript": "^3.1.4"
-  },
-  "dependencies": {
-    "react": ">= 16.3.0",
-    "react-dom": ">= 16.3.0"
   },
   "files": [
     "dist"
