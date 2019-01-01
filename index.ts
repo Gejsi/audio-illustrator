@@ -1,11 +1,11 @@
-export default class Visualizer {
+export default class Illustrator {
   audioSrc: MediaElementAudioSourceNode
   analyser: AnalyserNode
-  id: number
+  loopId: number
 
-  connect = (audioRef: HTMLAudioElement) => {
+  connect = (element: HTMLAudioElement | HTMLVideoElement) => {
     const ctx = new AudioContext()
-    this.audioSrc = ctx.createMediaElementSource(audioRef)
+    this.audioSrc = ctx.createMediaElementSource(element)
     this.analyser = ctx.createAnalyser()
 
     this.audioSrc.connect(this.analyser)
@@ -45,10 +45,10 @@ export default class Visualizer {
   }
 
   startLoop = (callback: FrameRequestCallback) => {
-    this.id = requestAnimationFrame(callback)
+    this.loopId = requestAnimationFrame(callback)
   }
 
   stopLoop = () => {
-    cancelAnimationFrame(this.id)
+    cancelAnimationFrame(this.loopId)
   }
 }
