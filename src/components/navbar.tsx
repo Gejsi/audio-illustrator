@@ -93,12 +93,12 @@ const Nav = ({ location, theme }) => (
       Demo
     </RouterLink>
     <GHLink
-      href='https://github.com/Gejsi/react-audio-illustrator/'
+      href='https://github.com/Gejsi/audio-illustrator/'
       target='_blank'
       rel='external'
       title='Go to GitHub page'
     >
-      <h3>react-audio-illustrator</h3>
+      <h3>audio-illustrator</h3>
     </GHLink>
     <RouterLink exact to='/docs' activeStyle={{ color: theme.secondary }}>
       Docs

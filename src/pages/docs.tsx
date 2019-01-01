@@ -33,10 +33,11 @@ const Wrapper = styled.div`
     font-size: ${rem(12)};
     letter-spacing: ${rem(1)};
     text-transform: uppercase;
-    margin: ${rem(32)} 0;
+    margin: ${rem(20)} 0;
 
     code {
       background: #272822;
+      line-height: 2.5;
       padding: ${rem(8)};
       text-transform: initial;
       font-size: ${rem(14)};
