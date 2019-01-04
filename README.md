@@ -46,7 +46,8 @@ Dismantles the objects which store the data.
 
 #### `illustrator.getData(items?: number)`
 
-Stores the data for the amount of items you need (default is 128).
+Provides real-time frequency or time-domain analysis information (depending on the
+[waveform parameter](#illustrator-waveform-boolean-)) for the amount of items you need (default is 128).
 
 #### `illustrator.startLoop(callback: FrameRequestCallback)`
 
@@ -62,8 +63,7 @@ Represents the audio source.
 
 #### `illustrator.analyser`
 
-Provides real-time frequency or time-domain analysis information depending on the
-[waveform parameter](#illustrator-waveform-boolean-)
+Represents the [AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
 
 ## Usage with React
 
