@@ -85,13 +85,14 @@ class App extends React.Component {
     illustrator.disconnect()
   }
 
-  handlePlay() {
+  handlePlay = () => {
     illustrator.startLoop()
 
     this.setState({ audioData: illustrator.getData(18) })
+    // draw on canvas
   }
 
-  handlePause() {
+  handlePause = () => {
     illustrator.stopLoop()
   }
 
