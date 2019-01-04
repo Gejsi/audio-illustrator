@@ -7,7 +7,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 import 'prismjs/themes/prism-okaidia.css'
 import styled from '../styled-components'
 import { Container } from '../components/container'
-import { rem, darken } from 'polished'
+import { rem, darken, lighten } from 'polished'
 
 const Wrapper = styled.div`
   [align='center'] {
@@ -49,6 +49,13 @@ const Wrapper = styled.div`
     margin: ${rem(16)} 0;
     font-size: ${rem(14)};
     letter-spacing: ${rem(0.25)};
+
+    code {
+      background: ${lighten(0.1, '#272822')};
+      line-height: 2;
+      padding: ${rem(4)};
+      font-size: ${rem(14)};
+    }
   }
 
   a:link {
@@ -75,7 +82,10 @@ export class Docs extends React.Component<any, any> {
     )
     const json = await res.json()
 
-    const content = atob(json.content)
+    const content = atob(json.content).replace(
+      '[waveform parameter](#illustrator-waveform-boolean-)',
+      '`waveform parameter`'
+    )
 
     this.setState({ content })
 
