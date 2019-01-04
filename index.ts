@@ -2,15 +2,25 @@ export default class Illustrator {
   audioSrc: MediaElementAudioSourceNode
   analyser: AnalyserNode
   loopId: number
+  isWaveform: boolean
 
-  connect = (element: HTMLAudioElement | HTMLVideoElement) => {
+  constructor(option?: { waveform: boolean }) {
+    if (option === undefined || option.waveform !== true) {
+      this.isWaveform = false
+    } else {
+      this.isWaveform = true
+    }
+  }
+
+  connect = (audio: HTMLAudioElement | HTMLVideoElement) => {
     const ctx = new AudioContext()
-    this.audioSrc = ctx.createMediaElementSource(element)
+    this.audioSrc = ctx.createMediaElementSource(audio)
     this.analyser = ctx.createAnalyser()
 
     this.audioSrc.connect(this.analyser)
     this.analyser.connect(ctx.destination)
-    this.analyser.fftSize = 256
+
+    this.analyser.fftSize = this.isWaveform ? 2048 : 256
   }
 
   disconnect = () => {
@@ -37,7 +47,11 @@ export default class Illustrator {
       )
     }
 
-    this.analyser.getByteFrequencyData(dataArray)
+    if (this.isWaveform) {
+      this.analyser.getByteTimeDomainData(dataArray)
+    } else {
+      this.analyser.getByteFrequencyData(dataArray)
+    }
 
     if (items === undefined) return dataArray
 

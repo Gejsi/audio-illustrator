@@ -1,6 +1,6 @@
 {
   "name": "audio-illustrator",
-  "version": "1.0.5",
+  "version": "1.5.0",
   "description": "Visualize audio using the Web Audio API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gejsi/react-audio-illustrator.git"
+    "url": "git+https://github.com/Gejsi/audio-illustrator.git"
   },
   "author": "Gejsi <vgejsi@gmail.com>",
   "keywords": [
@@ -19,9 +19,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Gejsi/react-audio-illustrator/issues"
+    "url": "https://github.com/Gejsi/audio-illustrator/issues"
   },
-  "homepage": "https://github.com/Gejsi/react-audio-illustrator#readme",
+  "homepage": "https://github.com/Gejsi/audio-illustrator#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",

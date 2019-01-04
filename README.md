@@ -31,7 +31,12 @@ const startDrawing = () => {
 const stopDrawing = () => illustrator.stopLoop()
 ```
 
-#### `illustrator.connect(element: HTMLAudioElement | HTMLVideoElement)`
+#### `Illustrator({ waveform: boolean })`
+
+Contains all the methods. If `waveform` is true you get the current time-domain data, useful for creating waveform visualizations. <br />
+Otherwise you get the current frequency data, useful for creating visualizations with bars.
+
+#### `illustrator.connect(audio: HTMLAudioElement | HTMLVideoElement)`
 
 Creates the objects which store the data.
 
@@ -53,11 +58,12 @@ Stops the loop using `cancelAnimationFrame()`.
 
 #### `illustrator.audioSrc`
 
-Represents an audio source consisting of an HTML5 `<audio>` or `<video>` element.
+Represents the audio source.
 
 #### `illustrator.analyser`
 
-Provides real-time frequency and time-domain analysis information.
+Provides real-time frequency or time-domain analysis information depending on the
+[waveform parameter](illustratorwaveform-boolean)
 
 ## Usage with React
 
