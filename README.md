@@ -63,7 +63,7 @@ Represents the audio source.
 #### `illustrator.analyser`
 
 Provides real-time frequency or time-domain analysis information depending on the
-[waveform parameter](illustratorwaveform-boolean)
+[waveform parameter](#illustrator-waveform-boolean-)
 
 ## Usage with React
 
