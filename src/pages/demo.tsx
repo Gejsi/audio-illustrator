@@ -42,7 +42,7 @@ const Wrapper = styled(Container)`
   overflow: none;
 `
 
-export class Demo extends React.Component<null, IState> {
+export class Demo extends React.Component<any, IState> {
   audio: HTMLAudioElement
   illustrator: Illustrator
 
@@ -55,7 +55,7 @@ export class Demo extends React.Component<null, IState> {
     muted: false,
     volumeValue: 0.1,
     audioData: new Uint8Array(0),
-    isConnected: false
+    isConnected: false,
   }
 
   componentDidMount() {
@@ -67,7 +67,7 @@ export class Demo extends React.Component<null, IState> {
     this.illustrator.disconnect()
   }
 
-  private setRef = e => (this.audio = e)
+  private setRef = (e) => (this.audio = e)
 
   private handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ isConnected: true })
@@ -89,7 +89,7 @@ export class Demo extends React.Component<null, IState> {
 
   private handlePlay = () => {
     this.illustrator.startLoop(this.handlePlay)
-    this.setState({ isPlaying: true, audioData: this.illustrator.getData(22) })
+    this.setState({ isPlaying: true, audioData: this.illustrator.getData(44) })
   }
 
   private handlePause = () => {
@@ -113,7 +113,7 @@ export class Demo extends React.Component<null, IState> {
   }
 
   private handleTimeInput = ({
-    target
+    target,
   }: React.ChangeEvent<HTMLInputElement>) => {
     this.audio.currentTime = target.valueAsNumber
     this.setState({ muted: true })
@@ -124,7 +124,7 @@ export class Demo extends React.Component<null, IState> {
   }
 
   private handleVolumeInput = ({
-    target
+    target,
   }: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ volumeValue: target.valueAsNumber })
 
@@ -140,7 +140,7 @@ export class Demo extends React.Component<null, IState> {
       timeValue,
       muted,
       volumeValue,
-      audioData
+      audioData,
     } = this.state
 
     return (

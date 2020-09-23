@@ -8,7 +8,7 @@ export const theme = {
   primary: '#1ba897',
   secondary: '#FF80AB',
   tertiary: '#12223e',
-  textOnPrimary: '#000'
+  textOnPrimary: '#000',
 }
 
 export const GlobalStyle = createGlobalStyle`
@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Rubik', sans-serif;
-    background: ${({ theme }) => theme.background};
+    overflow: hidden;
 
     #root {
       height: 100vh;
@@ -31,7 +31,7 @@ const civilizeTime = (t: number): string[] => {
   const time: string = humanize(t * 1000, {
     delimiter: ':',
     units: ['h', 'm', 's'],
-    round: true
+    round: true,
   })
 
   const str = time.split(':')
@@ -43,7 +43,7 @@ const civilizeTime = (t: number): string[] => {
         : '00',
       typeof args[1] === 'number'
         ? str[args[1]].replace(/[^0-9\.]+/g, '')
-        : '00'
+        : '00',
     ]
 
     if (args.length === 2) return baseArgs
@@ -52,7 +52,7 @@ const civilizeTime = (t: number): string[] => {
       ...baseArgs,
       typeof args[2] === 'number'
         ? str[args[2]].replace(/[^0-9\.]+/g, '')
-        : '00'
+        : '00',
     ]
   }
 
@@ -74,10 +74,10 @@ const civilizeTime = (t: number): string[] => {
     }
   }
 
-  return str.map(s => s.replace(/[^0-9\.]+/g, ''))
+  return str.map((s) => s.replace(/[^0-9\.]+/g, ''))
 }
 
 export const humanizeTime = (t: number): string =>
   civilizeTime(t)
-    .map(s => (s.length === 1 ? `0${s}` : s))
+    .map((s) => (s.length === 1 ? `0${s}` : s))
     .join(':')

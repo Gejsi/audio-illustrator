@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from '../styled-components'
 import { IconButton } from './iconButton'
-import { PauseIcon, PlayIcon } from '../icons'
+import { PauseIcon, PlayIcon } from './icons'
 import { size } from 'polished'
 
 const Container = styled.div`
@@ -45,14 +45,14 @@ const LinearBars = ({ bars, audioData }) => {
 
   return (
     <Bars>
-      {barsArray.map(n => (
+      {barsArray.map((n) => (
         <rect
           key={n.toString()}
           width={100 / barsArray.length + '%'}
-          height={audioData.length !== 0 ? (audioData[n] / 255) * 100 + '%' : 0}
+          height={audioData.length !== 0 ? (audioData[n] / 256) * 100 + '%' : 0}
           x={(100 / barsArray.length) * n + '%'}
           y={
-            audioData.length !== 0 ? 100 - (audioData[n] / 255) * 100 + '%' : 0
+            audioData.length !== 0 ? 100 - (audioData[n] / 256) * 100 + '%' : 0
           }
         />
       ))}

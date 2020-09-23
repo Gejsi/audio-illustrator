@@ -15,5 +15,5 @@
     "types": ["react", "react-dom", "styled-components"]
   },
   "include": ["src/*"],
-  "exclude": ["node_modules", "src/demo.tsx", "dist"]
+  "exclude": ["node_modules", "src/pages/home.tsx", "dist"]
 }

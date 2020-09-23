@@ -3,7 +3,7 @@ import styled, { css } from '../styled-components'
 import { rgba } from 'polished'
 import { humanizeTime } from '../utils'
 import { IconButton } from './iconButton'
-import { VolumeOff, VolumeOn } from '../icons'
+import { VolumeOff, VolumeOn } from './icons'
 
 const thumbStyles = css`
   height: 12px;
@@ -98,6 +98,7 @@ const TimeSlider = styled.div`
   span {
     align-self: center;
     padding: 0 10px;
+    color: ${({ theme }) => theme.text};
   }
 `
 
@@ -143,7 +144,7 @@ export const AudioControls = ({
   onVolumeInput,
   ...rest
 }: IProps) => (
-  <Container {...rest}>
+  <>
     <TimeSlider>
       <span>{humanizeTime(timeValue)}</span>
       <Slider
@@ -172,5 +173,5 @@ export const AudioControls = ({
         step='0.01'
       />
     </VolumeSlider>
-  </Container>
+  </>
 )

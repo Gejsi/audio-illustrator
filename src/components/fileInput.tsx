@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from '../styled-components'
 import { rgba, darken } from 'polished'
-import { UploadFile } from '../icons'
+import { UploadFile } from './icons'
 
 const Label = styled.label.attrs({
-  htmlFor: 'audio-upload'
+  htmlFor: 'audio-upload',
 })`
   cursor: pointer;
   outline: none;
@@ -58,7 +58,7 @@ const Label = styled.label.attrs({
 const Input = styled.input.attrs({
   type: 'file',
   id: 'audio-upload',
-  accept: 'audio/*'
+  accept: 'audio/*',
 })`
   width: 0.1px;
   height: 0.1px;
