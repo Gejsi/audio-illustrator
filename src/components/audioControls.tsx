@@ -78,19 +78,6 @@ export const Slider = styled.input`
   }
 `
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  color: inherit;
-  width: 80%;
-  margin: 0 auto 32px auto;
-  transition: width 150ms;
-
-  @media (max-width: 540px) {
-    width: 100%;
-  }
-`
-
 const TimeSlider = styled.div`
   display: flex;
   flex: 2;
@@ -99,6 +86,7 @@ const TimeSlider = styled.div`
     align-self: center;
     padding: 0 10px;
     color: ${({ theme }) => theme.text};
+    font-size: 0.875rem;
   }
 `
 
@@ -115,6 +103,18 @@ const VolumeSlider = styled.div`
   input {
     padding: 0 10px;
   }
+
+  @media (max-width: 960px) {
+    display: none;
+  }
+`
+
+const SongTitle = styled.h6`
+  margin: 0;
+  font-size: 0.875rem;
+  letter-spacing: 1.05px;
+  color: white;
+  padding-left: 0.625rem;
 `
 
 interface IProps {
@@ -144,34 +144,41 @@ export const AudioControls = ({
   onVolumeInput,
   ...rest
 }: IProps) => (
-  <>
-    <TimeSlider>
-      <span>{humanizeTime(timeValue)}</span>
-      <Slider
-        type='range'
-        onInput={onTimeInput}
-        onMouseUp={onTimeChange}
-        onKeyUp={onTimeChange}
-        onTouchEnd={onTimeChange}
-        min='0'
-        max={duration}
-        value={timeValue}
-        readOnly
-      />
-      <span>{humanizeTime(duration)}</span>
-    </TimeSlider>
-    <VolumeSlider>
-      <IconButton onClick={onMute}>
-        {muted ? <VolumeOff /> : <VolumeOn />}
-      </IconButton>
-      <Slider
-        type='range'
-        onChange={onVolumeInput}
-        value={volumeValue}
-        min='0'
-        max='1'
-        step='0.01'
-      />
-    </VolumeSlider>
-  </>
+  <div
+    style={{
+      width: '100%',
+    }}
+  >
+    <SongTitle>Trevor Daniel - Falling Down</SongTitle>
+    <div style={{ display: 'flex' }}>
+      <TimeSlider>
+        <span>{humanizeTime(timeValue)}</span>
+        <Slider
+          type='range'
+          onInput={onTimeInput}
+          onMouseUp={onTimeChange}
+          onKeyUp={onTimeChange}
+          onTouchEnd={onTimeChange}
+          min='0'
+          max={duration}
+          value={timeValue}
+          readOnly
+        />
+        <span>{humanizeTime(duration)}</span>
+      </TimeSlider>
+      <VolumeSlider>
+        <IconButton onClick={onMute}>
+          {muted ? <VolumeOff /> : <VolumeOn />}
+        </IconButton>
+        <Slider
+          type='range'
+          onChange={onVolumeInput}
+          value={volumeValue}
+          min='0'
+          max='1'
+          step='0.01'
+        />
+      </VolumeSlider>
+    </div>
+  </div>
 )

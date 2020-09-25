@@ -49,7 +49,7 @@ const Button = styled(IconButton)`
   justify-content: center;
   align-items: center;
   padding: 0;
-  ${size(48)};
+  ${size(38)};
 
   svg {
     ${size(24)}
