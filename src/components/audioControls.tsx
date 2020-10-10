@@ -17,8 +17,8 @@ const thumbStyles = css`
 export const Slider = styled.input`
   -webkit-appearance: none;
   width: 100%;
+  height: 100%;
   background: transparent;
-  height: 38px;
   cursor: pointer;
 
   &:focus {
@@ -81,6 +81,8 @@ export const Slider = styled.input`
 const TimeSlider = styled.div`
   display: flex;
   flex: 2;
+  align-items: center;
+  height: 1.125rem;
 
   span {
     align-self: center;
@@ -93,6 +95,8 @@ const TimeSlider = styled.div`
 const VolumeSlider = styled.div`
   display: flex;
   flex: 1;
+  align-items: center;
+  height: 1.125rem;
 
   svg {
     fill: currentColor;
@@ -104,13 +108,13 @@ const VolumeSlider = styled.div`
     padding: 0 10px;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 480px) {
     display: none;
   }
 `
 
 const SongTitle = styled.h6`
-  margin: 0;
+  margin: 0 0 0.625rem 0;
   font-size: 0.875rem;
   letter-spacing: 1.05px;
   color: white;
@@ -144,11 +148,7 @@ export const AudioControls = ({
   onVolumeInput,
   ...rest
 }: IProps) => (
-  <div
-    style={{
-      width: '100%',
-    }}
-  >
+  <div style={{ flex: 1 }}>
     <SongTitle>Trevor Daniel - Falling Down</SongTitle>
     <div style={{ display: 'flex' }}>
       <TimeSlider>
@@ -164,7 +164,7 @@ export const AudioControls = ({
           value={timeValue}
           readOnly
         />
-        <span>{humanizeTime(duration)}</span>
+        <span style={{ paddingRight: 0 }}>{humanizeTime(duration)}</span>
       </TimeSlider>
       <VolumeSlider>
         <IconButton onClick={onMute}>

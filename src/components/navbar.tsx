@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { RefObject, useState } from 'react'
 import styled, { withTheme } from '../styled-components'
 import { AudioControls } from './audioControls'
 import { IconButton } from './iconButton'
@@ -12,35 +12,8 @@ export const Bar = styled.nav`
   min-height: 4.5rem;
   background: ${({ theme }) => theme.background};
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-`
-
-const SearchField = styled('input')`
-  flex-basis: 25%;
-  flex-grow: 1;
-  height: 30%;
-  border: none;
-  background: white;
-  border: none;
-  border-radius: 1.5rem;
-  padding: 0.75rem;
-  outline: none;
-  margin: 0.625rem;
-  transition: transform 150ms;
-
-  &:focus {
-    transform: scale(1.03);
-  }
-`
-
-const Wrapper = styled.div`
-  flex-basis: 0;
-  flex-grow: 999;
-  min-height: 4.5rem;
-  min-width: 50%;
-  display: flex;
-  align-items: center;
+  padding: 0 0.625rem;
 `
 
 const Button = styled(IconButton)`
@@ -56,25 +29,59 @@ const Button = styled(IconButton)`
   }
 `
 
-const Nav = ({ theme }) => {
+type Props = {
+  audioEl: RefObject<HTMLAudioElement>
+  timeValue: number
+  duration: number
+  handleMute: any
+  muted: boolean
+}
+
+const Nav = ({ audioEl, timeValue, duration, handleMute, muted }: Props) => {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [volumeValue, setVolumeValue] = useState(0.2)
+
+  const handleClick = () => {
+    setIsPlaying(!isPlaying)
+
+    if (isPlaying) audioEl.current?.pause()
+    else audioEl.current?.play()
+  }
+
+  const handleTimeInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (audioEl.current) {
+      audioEl.current.currentTime = target.valueAsNumber
+      audioEl.current.volume = 0
+    }
+  }
+
+  const handleVolumeInput = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setVolumeValue(target.valueAsNumber)
+
+    if (audioEl.current) audioEl.current.volume = target.valueAsNumber
+  }
+
+  const handleTimeChange = () => {
+    if (audioEl.current) audioEl.current.volume = volumeValue
+  }
+
   return (
     <Bar>
-      <SearchField type='text' placeholder='Put a YouTube url' />
-      <Wrapper>
-        <Button>
-          <PauseIcon />
-        </Button>
-        <AudioControls
-          duration={1000}
-          muted={true}
-          onMute={() => null}
-          onTimeChange={() => null}
-          onTimeInput={() => null}
-          onVolumeInput={() => null}
-          timeValue={0}
-          volumeValue={0.5}
-        />
-      </Wrapper>
+      <Button onClick={handleClick}>
+        {isPlaying ? <PauseIcon /> : <PlayIcon />}
+      </Button>
+      <AudioControls
+        duration={duration}
+        muted={muted}
+        onMute={handleMute}
+        onTimeChange={handleTimeChange}
+        onTimeInput={handleTimeInput}
+        timeValue={timeValue}
+        onVolumeInput={handleVolumeInput}
+        volumeValue={volumeValue}
+      />
     </Bar>
   )
 }

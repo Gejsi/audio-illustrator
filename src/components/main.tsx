@@ -1,6 +1,19 @@
 import React from 'react'
-import styled from '../styled-components'
+import styled, { keyframes } from '../styled-components'
 import { rgba } from 'polished'
+
+const rotateToCenter = keyframes`
+  0% {
+		transform: translate(-50%, -100%) rotate(-180deg) scale(0.1);
+		opacity: 0;
+	}
+`
+
+const showBars = keyframes`
+  100% {
+		opacity: 1;
+	}
+`
 
 const Outer = styled.div`
   position: relative;
@@ -9,9 +22,11 @@ const Outer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
-  box-shadow: ${rgba('red', 0.2)} 0px 11px 15px -7px,
-    ${rgba('red', 0.14)} 0px 24px 38px 3px,
-    ${rgba('red', 0.12)} 0px 9px 46px 8px;
+  box-shadow: ${rgba('#FA1B37', 0.2)} 0px 11px 15px -7px,
+    ${rgba('#FA1B37', 0.14)} 0px 24px 38px 3px,
+    ${rgba('#FA1B37', 0.12)} 0px 9px 46px 8px;
+
+  animation: ${rotateToCenter} 1.5s none;
 
   &:before {
     display: block;
@@ -39,12 +54,12 @@ const Inner = styled.div`
     position: absolute;
     width: 15%;
     height: 75%;
-    background: ${rgba('red', 0.6)};
+    background: ${rgba('#FA1B37', 0.8)};
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
       rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
     z-index: -1;
-    animation: showBars 300ms 1.5s forwards;
-    opacity: 1;
+    animation: ${showBars} 300ms 1.5s forwards;
+    opacity: 0;
   }
   &:before {
     transform: skew(-45deg) translate(45%, -15%);
@@ -54,8 +69,15 @@ const Inner = styled.div`
   }
 `
 
+const Canvas = styled.canvas`
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 20vh;
+`
+
 export const Main = () => (
-  <div style={{ width: '100vw', height: '100vh', background: 'cyan' }}>
+  <div style={{ width: '100vw', height: '100vh', background: '#303030' }}>
     <Outer>
       <Inner>
         <img
@@ -64,6 +86,6 @@ export const Main = () => (
         />
       </Inner>
     </Outer>
-    <canvas style={{ position: 'fixed' }}></canvas>
+    <Canvas />
   </div>
 )
