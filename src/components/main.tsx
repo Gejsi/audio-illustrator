@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from '../styled-components'
 import { rgba } from 'polished'
+import { Visualizer } from './visualizer'
 
 const rotateToCenter = keyframes`
   0% {
@@ -69,14 +70,7 @@ const Inner = styled.div`
   }
 `
 
-const Canvas = styled.canvas`
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  height: 20vh;
-`
-
-export const Main = () => (
+export const Main = (props) => (
   <div style={{ width: '100vw', height: '100vh', background: '#303030' }}>
     <Outer>
       <Inner>
@@ -86,6 +80,6 @@ export const Main = () => (
         />
       </Inner>
     </Outer>
-    <Canvas />
+    <Visualizer audioEl={props.audioEl} />
   </div>
 )

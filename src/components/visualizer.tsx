@@ -1,78 +1,18 @@
-import * as React from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import styled from '../styled-components'
-import { IconButton } from './iconButton'
-import { PauseIcon, PlayIcon } from './icons'
-import { size } from 'polished'
+import Illustrator from 'audio-illustrator'
 
-const Container = styled.div`
-  flex: 0.75;
-  display: flex;
-  align-items: center;
+const Canvas = styled.canvas`
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 20vh;
 `
 
-const Button = styled(IconButton)`
-  border: 2px solid currentColor;
-  transform: translateY(-38px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  ${size(64)}
+export const Visualizer = ({ audioEl }) => {
+  const canvasEl = useRef(null)
+  const WIDTH = 821
+  const HEIGHT = 300
 
-  @media (max-width: 540px) {
-    ${size(48)}
-    transform: translateY(-24px);
-
-    svg {
-      ${size(24)}
-    }
-  }
-`
-
-const Bars = styled.svg`
-  height: 40%;
-  width: 80%;
-  fill: ${({ theme }) => theme.secondary};
-  fill-opacity: 0.5;
-
-  @media (max-width: 540px) {
-    width: 100%;
-  }
-`
-
-const LinearBars = ({ bars, audioData }) => {
-  const barsArray: number[] = Array.from({ length: bars }, (_, k) => k)
-
-  return (
-    <Bars>
-      {barsArray.map((n) => (
-        <rect
-          key={n.toString()}
-          width={100 / barsArray.length + '%'}
-          height={audioData.length !== 0 ? (audioData[n] / 256) * 100 + '%' : 0}
-          x={(100 / barsArray.length) * n + '%'}
-          y={
-            audioData.length !== 0 ? 100 - (audioData[n] / 256) * 100 + '%' : 0
-          }
-        />
-      ))}
-    </Bars>
-  )
+  return <Canvas ref={canvasEl} />
 }
-
-interface IProps {
-  isPlaying: boolean
-  onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void
-  audioData: Uint8Array
-}
-
-export const Visualizer = ({ isPlaying, onButtonClick, audioData }: IProps) => (
-  <React.Fragment>
-    <Container>
-      <Button onClick={onButtonClick}>
-        {isPlaying ? <PauseIcon /> : <PlayIcon />}
-      </Button>
-    </Container>
-    <LinearBars bars={22} audioData={audioData} />
-  </React.Fragment>
-)
