@@ -2,13 +2,13 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import { ThemeProvider } from 'styled-components'
 import { theme, GlobalStyle } from './utils'
-import { Home } from './pages/home'
+import { Primary } from './pages/primary'
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <React.Fragment>
       <GlobalStyle />
-      <Home />
+      <Primary />
     </React.Fragment>
   </ThemeProvider>
 )

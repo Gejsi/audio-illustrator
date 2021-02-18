@@ -13,7 +13,8 @@ export const theme = {
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize()};
-  * {
+  
+	* {
     box-sizing: border-box;
   }
 
@@ -24,10 +25,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Rubik', sans-serif;
     overflow: hidden;
-
-    #root {
-      height: 100vh;
-    }
+		background-color: #303030;
   }
 `
 
