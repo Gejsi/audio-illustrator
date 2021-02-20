@@ -1,55 +1,40 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Holder } from '../components/holder'
 import { Title } from '../components/title'
 import { Vessel } from '../components/vessel'
-import { Expande, Section } from '../components/section'
+import { Box } from '../components/box'
+import { Button } from '../components/button'
+import styled, { css } from '../styled-components'
+import { CloseIcon, PauseIcon, PlayIcon } from '../components/icons'
 
-import eyePhoto from '../../static/eye-photo.png'
-import skullPhoto from '../../static/skull-photo.png'
-import controllerPhoto from '../../static/controller-photo.png'
+import eye from '../../static/eye.gif'
+import skull from '../../static/skull.gif'
+import controller from '../../static/controller.gif'
 
 export const Primary = () => {
-  const [opened, setOpened] = useState(false)
-  const [id, setId] = useState(-1)
-
-  const handleClick = (i: number) => {
-    setId(i)
-    setOpened(!opened)
-  }
+  const [id, setId] = useState(1)
 
   return (
     <Holder style={{ overflow: 'hidden' }}>
       <Title />
 
-      <Vessel>
-        <Section
-          onClick={() => handleClick(0)}
-          style={{
-            backgroundImage: `url(${eyePhoto})`,
-            zIndex: id == 0 ? 2 : 1,
-          }}>
-          Jack Stauber
-          <Expande opened={id == 0 ? opened : false} />
-        </Section>
-        <Section
-          onClick={() => handleClick(1)}
-          style={{
-            backgroundImage: `url(${skullPhoto})`,
-            zIndex: id == 1 ? 2 : 1,
-          }}>
-          Joji
-          <Expande opened={id == 1 ? opened : false} />
-        </Section>
-        <Section
-          onClick={() => handleClick(2)}
-          style={{
-            backgroundImage: `url(${controllerPhoto})`,
-            zIndex: id == 2 ? 2 : 1,
-          }}>
-          Amstergates
-          <Expande opened={id == 2 ? opened : false} />
-        </Section>
-      </Vessel>
+      <Vessel onIdChange={(i) => setId(i)} />
+
+      <Box
+        style={{
+          backgroundImage: `url(${
+            id === 0 ? eye : id === 1 ? skull : controller
+          })`,
+        }}>
+        <Button>
+          <PlayIcon />
+        </Button>
+        <h1>Joji</h1>
+        <p>Can't get over you</p>
+        <Button small>
+          <CloseIcon />
+        </Button>
+      </Box>
     </Holder>
   )
 }
