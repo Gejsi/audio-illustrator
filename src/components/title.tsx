@@ -1,3 +1,4 @@
+import * as React from 'react'
 import styled, { keyframes } from '../styled-components'
 
 const changeColor = keyframes`
@@ -15,7 +16,7 @@ const changeColor = keyframes`
 	91%{color: rgb(255,0,0);}
 `
 
-export const Title = styled.div`
+const T = styled.div`
   display: flex;
   flex: 0.5;
   flex-direction: column;
@@ -45,3 +46,10 @@ export const Title = styled.div`
     }
   }
 `
+
+export const Title = () => (
+  <T>
+    <h1>VISUALIZE</h1>
+    <p>(choose between these artists to visualize their music)</p>
+  </T>
+)

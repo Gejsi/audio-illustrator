@@ -12,7 +12,8 @@
     "strictNullChecks": true,
     "preserveConstEnums": true,
     "declaration": false,
-    "types": ["react", "react-dom", "styled-components"]
+    "types": ["react", "react-dom", "styled-components"],
+    "esModuleInterop": true
   },
   "include": ["src/*"],
   "exclude": ["node_modules", "src/pages/home.tsx", "dist"]

@@ -1,4 +1,3 @@
-import { StyledComponent } from 'styled-components'
 import styled, { keyframes } from '../styled-components'
 
 const changeBorderColor = keyframes`
@@ -49,4 +48,16 @@ export const Section = styled.div`
   &:hover {
     animation: ${changeBorderColor} 2s linear infinite;
   }
+`
+
+export const Expande = styled.div<{ opened: boolean }>`
+  position: absolute;
+  background: white;
+  height: ${(props) => (props.opened ? '100vh' : '100%')};
+  width: ${(props) => (props.opened ? '100vw' : '100%')};
+  transform: ${(props) => (props.opened ? 'scale(2)' : 'scale(1)')};
+  opacity: ${(props) => (props.opened ? 1 : 0)};
+  transition: opacity 300ms linear
+      ${(props) => (props.opened ? '0ms' : '800ms')},
+    width 800ms, height 800ms, transform 800ms;
 `
