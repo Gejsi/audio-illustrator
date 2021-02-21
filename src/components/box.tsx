@@ -12,11 +12,19 @@ export const Box = styled.div<{ visible: boolean; opened: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   transition: opacity 200ms linear;
 
   opacity: ${(props) => (props.visible ? 1 : 0)};
   z-index: ${(props) => (props.opened ? 100 : -1)};
+
+  div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   h1 {
     font-size: calc(30px + 2vw);
