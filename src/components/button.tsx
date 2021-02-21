@@ -22,6 +22,13 @@ export const Button = styled.button<{ small?: boolean }>`
       margin: 1rem;
     `}
 
+  svg {
+    width: ${(props) =>
+      props.small ? 'calc(20px + 3vw)' : 'calc(3rem + 20vw)'};
+    height: ${(props) =>
+      props.small ? 'calc(20px + 3vh)' : 'calc(3rem + 20vh)'};
+  }
+
   &:hover {
     background: ${({ theme }) => rgba(theme.text, 0.08)};
   }
@@ -32,12 +39,5 @@ export const Button = styled.button<{ small?: boolean }>`
 
   &:active {
     background: ${({ theme }) => rgba(theme.text, 0.2)};
-  }
-
-  svg {
-    width: ${(props) =>
-      props.small ? 'calc(20px + 3vw)' : 'calc(3rem + 20vw)'};
-    height: ${(props) =>
-      props.small ? 'calc(20px + 3vh)' : 'calc(3rem + 20vh)'};
   }
 `

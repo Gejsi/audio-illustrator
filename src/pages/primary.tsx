@@ -13,25 +13,53 @@ import controller from '../../static/controller.gif'
 
 export const Primary = () => {
   const [id, setId] = useState(1)
+  const [opened, setOpened] = useState(false)
+  const [visible, setVisible] = useState(false)
+
+  const handleIdChange = (i) => {
+    setId(i)
+    setOpened(true)
+
+    setTimeout(() => {
+      setVisible(true)
+    }, 500)
+  }
+
+  const handleClose = () => {
+    setVisible(false)
+
+    setTimeout(() => {
+      setOpened(false)
+    }, 200)
+  }
 
   return (
     <Holder style={{ overflow: 'hidden' }}>
       <Title />
 
-      <Vessel onIdChange={(i) => setId(i)} />
+      <Vessel onIdChange={handleIdChange} opened={opened} />
 
       <Box
+        visible={visible}
+        opened={opened}
         style={{
           backgroundImage: `url(${
             id === 0 ? eye : id === 1 ? skull : controller
           })`,
-        }}>
+        }}
+      >
         <Button>
           <PlayIcon />
         </Button>
-        <h1>Joji</h1>
-        <p>Can't get over you</p>
-        <Button small>
+        <h1>{id === 0 ? 'Jack Stauber' : id === 1 ? 'Joji' : 'Amstergates'}</h1>
+        <p>
+          {id === 0
+            ? 'Buttercup'
+            : id === 1
+            ? 'Test Drive'
+            : "Can't get over you"}
+        </p>
+        <Button small onClick={handleClose}>
           <CloseIcon />
         </Button>
       </Box>

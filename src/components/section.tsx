@@ -58,6 +58,6 @@ export const Expande = styled.div<{ opened: boolean }>`
   transform: ${(props) => (props.opened ? 'scale(2)' : 'scale(1)')};
   opacity: ${(props) => (props.opened ? 1 : 0)};
   transition: opacity 300ms linear
-      ${(props) => (props.opened ? '0ms' : '800ms')},
-    width 800ms, height 800ms, transform 800ms;
+      ${(props) => (props.opened ? '0ms' : '500ms')},
+    width 500ms, height 500ms, transform 500ms;
 `

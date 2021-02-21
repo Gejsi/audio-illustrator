@@ -16,13 +16,11 @@ const Container = styled.div`
   margin: 0 auto;
 `
 
-export const Vessel = ({ onIdChange }) => {
-  const [opened, setOpened] = useState(false)
+export const Vessel = ({ onIdChange, opened }) => {
   const [id, setId] = useState(-1)
 
   const handleClick = (i: number) => {
     setId(i)
-    setOpened(!opened)
     onIdChange(i)
   }
 
@@ -33,7 +31,8 @@ export const Vessel = ({ onIdChange }) => {
         style={{
           backgroundImage: `url(${eyePhoto})`,
           zIndex: id == 0 ? 2 : 1,
-        }}>
+        }}
+      >
         Jack Stauber
         <Expande opened={id == 0 ? opened : false} />
       </Section>
@@ -42,7 +41,8 @@ export const Vessel = ({ onIdChange }) => {
         style={{
           backgroundImage: `url(${skullPhoto})`,
           zIndex: id == 1 ? 2 : 1,
-        }}>
+        }}
+      >
         Joji
         <Expande opened={id == 1 ? opened : false} />
       </Section>
@@ -51,7 +51,8 @@ export const Vessel = ({ onIdChange }) => {
         style={{
           backgroundImage: `url(${controllerPhoto})`,
           zIndex: id == 2 ? 2 : 1,
-        }}>
+        }}
+      >
         Amstergates
         <Expande opened={id == 2 ? opened : false} />
       </Section>

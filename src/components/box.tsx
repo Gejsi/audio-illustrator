@@ -1,7 +1,6 @@
-import styled from '../styled-components'
+import styled, { css } from '../styled-components'
 
-export const Box = styled.div`
-  z-index: 100;
+export const Box = styled.div<{ visible: boolean; opened: boolean }>`
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -14,6 +13,10 @@ export const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: opacity 200ms linear;
+
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  z-index: ${(props) => (props.opened ? 100 : -1)};
 
   h1 {
     font-size: calc(30px + 2vw);
