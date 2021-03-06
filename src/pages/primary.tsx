@@ -21,7 +21,18 @@ export const Primary = () => {
   const [opened, setOpened] = useState(false)
   const [visible, setVisible] = useState(false)
   const [playing, setPlaying] = useState(false)
-  const audioRef = useRef<HTMLAudioElement | HTMLVideoElement>(null)
+  const audioRef = useRef<any>(null)
+  const [data, setData] = useState<Uint8Array | number[] | undefined>(
+    new Uint8Array(0)
+  )
+  let illustrator = useRef<Illustrator | null>(null)
+
+  useEffect(() => {
+    illustrator.current = new Illustrator({ waveform: true })
+    illustrator.current.connect(audioRef.current)
+
+    return () => illustrator.current?.disconnect()
+  }, [])
 
   const handleIdChange = (i) => {
     setId(i)
@@ -41,6 +52,8 @@ export const Primary = () => {
 
     setPlaying(false)
     audioRef.current?.pause()
+    illustrator.current?.stopLoop()
+    setData(new Uint8Array(0))
   }
 
   const handleClick = () => {
@@ -51,11 +64,15 @@ export const Primary = () => {
   }
 
   const handlePlay = () => {
-    console.log('playing')
+    //@ts-ignore
+    illustrator.current?.analyser.context.resume().then(() => {
+      illustrator.current?.startLoop(handlePlay)
+      setData(illustrator.current?.getData())
+    })
   }
 
   const handlePause = () => {
-    console.log('paused')
+    illustrator.current?.stopLoop()
   }
 
   return (
@@ -105,6 +122,7 @@ export const Primary = () => {
               ? cantGetOverYou
               : null
           }
+          controls
           ref={audioRef}
           onPlay={handlePlay}
           onPause={handlePause}
