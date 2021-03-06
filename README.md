@@ -68,44 +68,45 @@ Represents the [AnalyserNode](https://developer.mozilla.org/en-US/docs/Web/API/A
 ## Usage with React
 
 ```jsx
-import * as React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Illustrator from 'audio-illustrator'
+import song from '...'
+import Canvas from '...'
 
-class App extends React.Component {
-  illustrator
+const App = () => {
+  const [data, setData] = useState(new Uint8Array(0))
+  const audioEl = useRef(null)
+  let illustrator = useRef(null)
 
-  state = { audioData: new Uint8Array(0) }
+  useEffect(() => {
+    illustrator.current = new Illustrator({ waveform: true })
+    illustrator.current.connect(audioEl.current)
 
-  componentDidMount() {
-    this.illustrator = new Illustrator()
-    illustrator.connect(this.audioRef)
+    return () => illustrator.current.disconnect()
+  }, [])
+
+  const handlePlay = () => {
+    illustrator.current.analyser.context.resume().then(() => {
+      illustrator.current.startLoop(handlePlay)
+      setData(illustrator.current.getData())
+    })
   }
 
-  componentWillUnmount() {
-    illustrator.disconnect()
+  const handlePause = () => {
+    illustrator.current.stopLoop()
   }
 
-  handlePlay = () => {
-    illustrator.startLoop()
+  return (
+    <div>
+      <audio
+        ref={audioEl}
+        onPlay={handlePlay}
+        onPause={handlePause}
+        src={song}
+      ></audio>
 
-    this.setState({ audioData: illustrator.getData(18) })
-    // draw on canvas
-  }
-
-  handlePause = () => {
-    illustrator.stopLoop()
-  }
-
-  render() {
-    return (
-      <div>
-        <audio
-          ref={e => (this.audioRef = e)}
-          onPlay={this.handlePlay}
-          onPause={this.handlePause}
-        />
-      </div>
-    )
-  }
+      <Canvas data={data} />
+    </div>
+  )
 }
 ```
