@@ -12,7 +12,7 @@ import eye from '../../static/eye.gif'
 import skull from '../../static/skull.gif'
 import controller from '../../static/controller.gif'
 import buttercup from '../../static/buttercup.mp3'
-import testDrive from '../../static/testDrive.mp3'
+import yeahRight from '../../static/yeahRight.mp3'
 import cantGetOverYou from '../../static/cantGetOverYou.mp3'
 
 export const Primary = () => {
@@ -29,6 +29,7 @@ export const Primary = () => {
   useEffect(() => {
     illustrator.current = new Illustrator({ waveform: true })
     illustrator.current.connect(audioRef.current)
+    audioRef.current.volume = 0.7
 
     return () => illustrator.current?.disconnect()
   }, [])
@@ -102,7 +103,7 @@ export const Primary = () => {
             {id === 0
               ? 'Buttercup'
               : id === 1
-              ? 'Test Drive'
+              ? 'Yeah Right'
               : "Can't get over you"}
           </p>
 
@@ -116,7 +117,7 @@ export const Primary = () => {
             id === 0
               ? buttercup
               : id === 1
-              ? testDrive
+              ? yeahRight
               : id === 2
               ? cantGetOverYou
               : null
@@ -124,6 +125,7 @@ export const Primary = () => {
           ref={audioRef}
           onPlay={handlePlay}
           onPause={handlePause}
+          onEnded={handleClose}
         />
 
         <Canvas data={data} playing={playing} />
