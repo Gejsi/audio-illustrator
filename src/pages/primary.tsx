@@ -6,7 +6,6 @@ import { Vessel } from '../components/vessel'
 import { Box } from '../components/box'
 import { Button } from '../components/button'
 import { Canvas } from '../components/canvas'
-import styled, { css } from '../styled-components'
 import { CloseIcon, PauseIcon, PlayIcon } from '../components/icons'
 
 import eye from '../../static/eye.gif'
@@ -122,13 +121,12 @@ export const Primary = () => {
               ? cantGetOverYou
               : null
           }
-          controls
           ref={audioRef}
           onPlay={handlePlay}
           onPause={handlePause}
         />
 
-        <Canvas />
+        <Canvas data={data} playing={playing} />
       </Box>
     </Holder>
   )
