@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Illustrator from 'audio-illustrator'
+import Parallax from 'parallax-js'
 import { Holder } from '../components/holder'
 import { Title } from '../components/title'
 import { Vessel } from '../components/vessel'
 import { Box } from '../components/box'
+import { Scene } from '../components/scene'
 import { Button } from '../components/button'
 import { Canvas } from '../components/canvas'
-import { CloseIcon, PauseIcon, PlayIcon } from '../components/icons'
+import { CloseIcon } from '../components/icons'
 
 import eye from '../../static/eye.gif'
 import skull from '../../static/skull.gif'
@@ -25,13 +27,22 @@ export const Primary = () => {
     new Uint8Array(0)
   )
   let illustrator = useRef<Illustrator | null>(null)
+  const playSceneRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     illustrator.current = new Illustrator({ waveform: true })
     illustrator.current.connect(audioRef.current)
-    audioRef.current.volume = 0.7
+    audioRef.current.volume = 0.6
 
-    return () => illustrator.current?.disconnect()
+    const parallaxInstance = new Parallax(playSceneRef.current, {
+      relativeInput: true,
+      pointerEvents: true,
+    })
+
+    return () => {
+      illustrator.current?.disconnect()
+      parallaxInstance.disable()
+    }
   }, [])
 
   const handleIdChange = (i) => {
@@ -90,27 +101,16 @@ export const Primary = () => {
           })`,
         }}
       >
-        <div>
-          <Button onClick={handleClick}>
-            {playing ? <PauseIcon /> : <PlayIcon />}
-          </Button>
+        <Scene
+          ref={playSceneRef}
+          onClick={handleClick}
+          playing={playing}
+          id={id}
+        />
 
-          <h1>
-            {id === 0 ? 'Jack Stauber' : id === 1 ? 'Joji' : 'Amstergates'}
-          </h1>
-
-          <p>
-            {id === 0
-              ? 'Buttercup'
-              : id === 1
-              ? 'Yeah Right'
-              : "Can't get over you"}
-          </p>
-
-          <Button small onClick={handleClose}>
-            <CloseIcon />
-          </Button>
-        </div>
+        <Button small onClick={handleClose}>
+          <CloseIcon />
+        </Button>
 
         <audio
           src={

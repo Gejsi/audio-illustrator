@@ -39,6 +39,7 @@
   "dependencies": {
     "audio-illustrator": "^1.0.4",
     "humanize-duration": "^3.16.0",
+    "parallax-js": "^3.1.0",
     "polished": "^2.3.1",
     "react": ">= 16.3.0",
     "react-dom": ">= 16.3.0",

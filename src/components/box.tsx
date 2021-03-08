@@ -1,4 +1,4 @@
-import styled, { css } from '../styled-components'
+import styled from '../styled-components'
 
 export const Box = styled.div<{ visible: boolean; opened: boolean }>`
   position: fixed;
@@ -17,24 +17,6 @@ export const Box = styled.div<{ visible: boolean; opened: boolean }>`
 
   opacity: ${(props) => (props.visible ? 1 : 0)};
   z-index: ${(props) => (props.opened ? 100 : -1)};
-
-  div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  h1 {
-    font-size: calc(30px + 2vw);
-    margin: 8px 0;
-  }
-
-  p {
-    font-size: calc(20px + 1vw);
-    margin: 0;
-  }
 
   &::before {
     content: '';
