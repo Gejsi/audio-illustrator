@@ -4,10 +4,6 @@ import { ThemedStyledComponentsModule } from 'styled-components'
 interface ITheme {
   text: string
   background: string
-  primary: string
-  secondary: string
-  tertiary: string
-  textOnPrimary: string
 }
 
 const {
@@ -16,7 +12,7 @@ const {
   keyframes,
   createGlobalStyle,
   withTheme,
-  ThemeProvider
+  ThemeProvider,
 } = styledComponents as ThemedStyledComponentsModule<ITheme>
 
 export { css, keyframes, createGlobalStyle, withTheme, ThemeProvider }

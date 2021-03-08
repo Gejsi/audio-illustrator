@@ -7,6 +7,6 @@ export const Holder = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #303030;
+  background-color: ${(props) => props.theme.background};
   user-select: none;
 `

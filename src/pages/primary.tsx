@@ -108,7 +108,7 @@ export const Primary = () => {
           id={id}
         />
 
-        <Button small onClick={handleClose}>
+        <Button small onClick={handleClose} tabIndex={-1}>
           <CloseIcon />
         </Button>
 

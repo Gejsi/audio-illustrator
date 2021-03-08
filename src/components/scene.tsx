@@ -33,7 +33,7 @@ export const Scene = forwardRef<HTMLDivElement, TProps>(
   ({ onClick, playing, id }, ref) => (
     <S ref={ref}>
       <div data-depth='0.6'>
-        <Button onClick={onClick}>
+        <Button onClick={onClick} tabIndex={-1}>
           {playing ? <PauseIcon /> : <PlayIcon />}
         </Button>
       </div>

@@ -7,7 +7,7 @@ export const Box = styled.div<{ visible: boolean; opened: boolean }>`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  color: white;
+  color: ${(props) => props.theme.text};
   fill: currentColor;
   display: flex;
   flex-direction: column;

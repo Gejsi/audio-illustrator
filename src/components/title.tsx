@@ -28,13 +28,13 @@ const T = styled.div`
     margin: 0;
     font-size: calc(1.125rem + 7vw);
     letter-spacing: 0.5vw;
-    color: white;
+    color: ${(props) => props.theme.text};
     font-family: 'Bungee Shade', cursive;
   }
 
   p {
     margin: 0.5rem 0;
-    color: white;
+    color: ${(props) => props.theme.text};
     opacity: 0.4;
     font-size: calc(0.75rem + 1vw);
     text-align: center;

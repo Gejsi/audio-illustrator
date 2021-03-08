@@ -18,7 +18,7 @@ const changeBorderColor = keyframes`
 export const Section = styled.div`
   height: 20vh;
   flex: 1;
-  border: 0.625rem solid white;
+  border: 0.625rem solid ${(props) => props.theme.text};
   margin: 1rem;
   min-width: 200px;
   max-width: 300px;
@@ -27,7 +27,7 @@ export const Section = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${(props) => props.theme.text};
   z-index: 1;
   font-size: calc(20px + 0.5vw);
   background-size: cover;
