@@ -52,7 +52,7 @@ export const Section = styled.div`
 
 export const Expande = styled.div<{ opened: boolean }>`
   position: absolute;
-  background: white;
+  background: ${(props) => props.theme.text};
   height: ${(props) => (props.opened ? '100vh' : '100%')};
   width: ${(props) => (props.opened ? '100vw' : '100%')};
   transform: ${(props) => (props.opened ? 'scale(2)' : 'scale(1)')};

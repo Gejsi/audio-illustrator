@@ -28,26 +28,30 @@ export const Primary = () => {
   )
   let illustrator = useRef<Illustrator | null>(null)
   const playSceneRef = useRef<HTMLDivElement>(null)
+  let parallaxInstance = useRef<any>(null)
 
   useEffect(() => {
     illustrator.current = new Illustrator({ waveform: true })
     illustrator.current.connect(audioRef.current)
     audioRef.current.volume = 0.6
 
-    const parallaxInstance = new Parallax(playSceneRef.current, {
+    parallaxInstance.current = new Parallax(playSceneRef.current, {
       relativeInput: true,
       pointerEvents: true,
     })
 
+    parallaxInstance.current.disable()
+
     return () => {
       illustrator.current?.disconnect()
-      parallaxInstance.disable()
+      parallaxInstance.current.destroy()
     }
   }, [])
 
   const handleIdChange = (i) => {
     setId(i)
     setOpened(true)
+    parallaxInstance.current.enable()
 
     setTimeout(() => {
       setVisible(true)
@@ -56,6 +60,7 @@ export const Primary = () => {
 
   const handleClose = () => {
     setVisible(false)
+    parallaxInstance.current.disable()
 
     setTimeout(() => {
       setOpened(false)
